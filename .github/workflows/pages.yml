@@ -33,12 +33,60 @@ jobs:
           enablement: true
 
       - name: Prepare public static preview
+        env:
+          MAESTRO_SUBMIT_URL: ${{ vars.MAESTRO_SUBMIT_URL }}
         run: |
           mkdir site
-          cp index.html site/index.html
-          cp maestro.html site/maestro.html
-          cp portfolio.html site/portfolio.html
-          cp maestro-hero.svg site/maestro-hero.svg
+          python3 - <<'PY'
+          import os
+          import re
+          from pathlib import Path
+          from html import escape
+          from urllib.parse import urlparse
+
+          page = Path("maestro.html").read_text(encoding="utf-8")
+          form = 'action="maestro-save.php" method="post"'
+          note = "Your enquiry is saved to the Maestro database. The site owner can review it in phpMyAdmin under the <strong>Maestro</strong> database."
+          button = '<button class="button" type="submit">Send project enquiry <span aria-hidden="true">-&gt;</span></button>'
+
+          endpoint = os.environ.get("MAESTRO_SUBMIT_URL", "").strip()
+          if endpoint:
+              parsed = urlparse(endpoint)
+              if (
+                  parsed.scheme != "https"
+                  or not parsed.hostname
+                  or parsed.username
+                  or parsed.password
+                  or parsed.query
+                  or parsed.fragment
+                  or re.search(r"""[\s"'<>\\]""", endpoint)
+              ):
+                  raise SystemExit("MAESTRO_SUBMIT_URL must be a public HTTPS URL without credentials, query, or fragment.")
+              try:
+                  parsed.port
+              except ValueError as error:
+                  raise SystemExit("MAESTRO_SUBMIT_URL has an invalid port.") from error
+              replacements = {
+                  form: f'action="{escape(endpoint, quote=True)}" method="post"',
+                  note: "Your enquiry is sent securely to Maestro. Your contact details are used to respond to your project enquiry.",
+              }
+          else:
+              replacements = {
+                  form: 'onsubmit="return false;"',
+                  note: "This public GitHub Pages preview is for viewing only. Enquiry submissions are not enabled yet.",
+                  button: '<button class="button" type="button" disabled>Enquiries unavailable until PHP hosting is connected</button>',
+              }
+
+          for old, new in replacements.items():
+              if page.count(old) != 1:
+                  raise SystemExit(f"Expected one enquiry-form replacement: {old}")
+              page = page.replace(old, new)
+
+          Path("site/index.html").write_text(page, encoding="utf-8")
+          Path("site/maestro.html").write_text(page, encoding="utf-8")
+          Path("site/portfolio.html").write_bytes(Path("portfolio.html").read_bytes())
+          Path("site/maestro-hero.svg").write_bytes(Path("maestro-hero.svg").read_bytes())
+          PY
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3

@@ -483,7 +483,7 @@
             position: absolute;
             left: 0;
             color: var(--violet-dark);
-            content: "âœ“";
+            content: "✓";
             font-weight: 800;
         }
 
@@ -1063,7 +1063,7 @@
                         <h3>Starter</h3>
                         <p class="price-summary">A polished, focused website for a new idea or small organization.</p>
                         <p class="price-amount">KES 15,000</p>
-                        <p class="price-unit">Starting price Â· one-time project fee</p>
+                        <p class="price-unit">Starting price · one-time project fee</p>
                         <ul class="price-features">
                             <li>Up to 3 pages</li>
                             <li>Mobile-friendly layout</li>
@@ -1077,7 +1077,7 @@
                         <h3>Business</h3>
                         <p class="price-summary">A fuller online presence for a growing business, school, or service.</p>
                         <p class="price-amount">KES 35,000</p>
-                        <p class="price-unit">Starting price Â· one-time project fee</p>
+                        <p class="price-unit">Starting price · one-time project fee</p>
                         <ul class="price-features">
                             <li>Up to 7 pages</li>
                             <li>Custom visual styling</li>
@@ -1091,7 +1091,7 @@
                         <h3>Advanced</h3>
                         <p class="price-summary">For larger websites, custom features, or more involved project needs.</p>
                         <p class="price-amount">KES 75,000+</p>
-                        <p class="price-unit">Starting price Â· quoted to project scope</p>
+                        <p class="price-unit">Starting price · quoted to project scope</p>
                         <ul class="price-features">
                             <li>Multi-page, custom website scope</li>
                             <li>Advanced features planned to your needs</li>
@@ -1212,9 +1212,9 @@
                     <p class="section-kicker">Your next step</p>
                     <h2>Let's make your idea happen.</h2>
                     <p>Tell us a little about your project. Whether you have a complete brief or just the beginning of an idea, we would love to hear what you are planning.</p>
-                    <div class="contact-note">This public GitHub Pages preview is for viewing only. Enquiry submissions are not enabled here.</div>
+                    <div class="contact-note">Your enquiry is saved to the Maestro database. The site owner can review it in phpMyAdmin under the <strong>Maestro</strong> database.</div>
                 </div>
-                <form class="contact-form" id="project-form" onsubmit="return false;">
+                <form class="contact-form" id="project-form" action="maestro-save.php" method="post">
                     <div class="field" style="position: absolute; left: -10000px;" aria-hidden="true">
                         <label for="website">Leave this field empty</label>
                         <input id="website" name="website" type="text" tabindex="-1" autocomplete="off">
@@ -1248,7 +1248,7 @@
                         <textarea id="message" name="message" maxlength="4000" placeholder="What are you hoping your website will help you do?" required></textarea>
                     </div>
                     <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
-                    <button class="button" type="button" disabled>Enquiries unavailable in preview</button>
+                    <button class="button" type="submit">Send project enquiry <span aria-hidden="true">-&gt;</span></button>
                 </form>
             </div>
         </section>
