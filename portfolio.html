@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Explore sample website concepts by Maestro for businesses, schools, online shops, portfolios, restaurants, and community organizations.">
+    <meta name="theme-color" content="#17171d">
+    <title>Sample Website Concepts | Maestro</title>
+    <style>
+        :root {
+            color-scheme: light;
+            --ink: #17171d;
+            --muted: #69696e;
+            --paper: #f7f6f2;
+            --white: #fff;
+            --line: #e5e3dc;
+            --violet: #7658df;
+            --violet-dark: #6142cf;
+            --lime: #d7f36a;
+            --orange: #ff9a67;
+            --radius: 22px;
+            --shadow: 0 18px 50px rgba(23, 23, 29, .08);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 90px;
+        }
+
+        body {
+            margin: 0;
+            color: var(--ink);
+            background: var(--paper);
+            font-family: Inter, "Segoe UI", Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        .wrap {
+            width: min(1120px, calc(100% - 48px));
+            margin-inline: auto;
+        }
+
+        .site-header {
+            position: sticky;
+            z-index: 5;
+            top: 0;
+            border-bottom: 1px solid rgba(23, 23, 29, .08);
+            background: rgba(247, 246, 242, .94);
+            backdrop-filter: blur(14px);
+        }
+
+        .header-inner {
+            display: flex;
+            min-height: 76px;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+        }
+
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--ink);
+            font-size: 1.22rem;
+            font-weight: 800;
+            letter-spacing: -.06em;
+            text-decoration: none;
+        }
+
+        .brand-mark {
+            display: grid;
+            width: 34px;
+            height: 34px;
+            place-items: center;
+            border-radius: 11px;
+            color: var(--ink);
+            background: var(--lime);
+            font-size: 1.1rem;
+            font-weight: 900;
+            letter-spacing: -.1em;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: clamp(18px, 3vw, 36px);
+        }
+
+        .nav-links a {
+            color: #55545c;
+            font-size: .88rem;
+            font-weight: 650;
+            text-decoration: none;
+        }
+
+        .nav-links a:hover,
+        .nav-links a:focus-visible {
+            color: var(--violet-dark);
+        }
+
+        .nav-links .nav-cta {
+            padding: 10px 17px;
+            border-radius: 999px;
+            color: var(--white);
+            background: var(--ink);
+        }
+
+        .hero {
+            padding: clamp(64px, 9vw, 106px) 0;
+            color: var(--white);
+            background:
+                radial-gradient(circle at 85% 20%, rgba(118, 88, 223, .42), transparent 34%),
+                linear-gradient(120deg, #17171d, #24202f);
+        }
+
+        .eyebrow {
+            margin: 0 0 15px;
+            color: var(--lime);
+            font-size: .77rem;
+            font-weight: 800;
+            letter-spacing: .13em;
+            text-transform: uppercase;
+        }
+
+        .hero h1 {
+            max-width: 760px;
+            margin: 0 0 18px;
+            font-size: clamp(2.8rem, 7vw, 5.3rem);
+            font-weight: 760;
+            letter-spacing: -.075em;
+            line-height: 1;
+        }
+
+        .hero h1 span {
+            color: var(--lime);
+        }
+
+        .hero-copy {
+            max-width: 660px;
+            margin: 0 0 28px;
+            color: #c4c2ca;
+            font-size: 1.08rem;
+        }
+
+        .button {
+            display: inline-flex;
+            min-height: 48px;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            padding: 11px 20px;
+            border-radius: 999px;
+            color: var(--ink);
+            background: var(--lime);
+            font-size: .9rem;
+            font-weight: 750;
+            text-decoration: none;
+            transition: transform .2s ease, background .2s ease;
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+            background: #e5fa94;
+        }
+
+        .section {
+            padding: clamp(64px, 8vw, 96px) 0;
+        }
+
+        .section-heading {
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+            gap: 28px;
+            margin-bottom: 34px;
+        }
+
+        .section-heading > div {
+            max-width: 700px;
+        }
+
+        .section-kicker {
+            margin: 0 0 11px;
+            color: var(--violet-dark);
+            font-size: .77rem;
+            font-weight: 800;
+            letter-spacing: .13em;
+            text-transform: uppercase;
+        }
+
+        .section-heading h2 {
+            margin: 0 0 10px;
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            font-weight: 740;
+            letter-spacing: -.065em;
+            line-height: 1.08;
+        }
+
+        .section-heading p:last-child {
+            max-width: 650px;
+            margin: 0;
+            color: var(--muted);
+        }
+
+        .concept-note {
+            max-width: 840px;
+            margin: -12px 0 30px;
+            padding: 13px 16px;
+            border: 1px solid #e6debf;
+            border-radius: 13px;
+            color: #5c512b;
+            background: #f9f6e8;
+            font-size: .85rem;
+        }
+
+        .sample-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 24px;
+        }
+
+        .sample-card {
+            overflow: hidden;
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            background: var(--white);
+            transition: transform .2s ease, box-shadow .2s ease;
+        }
+
+        .sample-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow);
+        }
+
+        .preview {
+            position: relative;
+            display: flex;
+            min-height: 275px;
+            overflow: hidden;
+            align-items: center;
+            justify-content: center;
+            padding: 32px;
+            background: #ece9e1;
+        }
+
+        .browser {
+            width: min(100%, 470px);
+            overflow: hidden;
+            border: 1px solid rgba(23, 23, 29, .12);
+            border-radius: 12px;
+            background: var(--white);
+            box-shadow: 0 18px 40px rgba(23, 23, 29, .18);
+            transform: rotate(-1.5deg);
+            transition: transform .25s ease;
+        }
+
+        .sample-card:nth-child(even) .browser {
+            transform: rotate(1.3deg);
+        }
+
+        .sample-card:hover .browser {
+            transform: rotate(0) scale(1.015);
+        }
+
+        .browser-bar {
+            display: flex;
+            height: 25px;
+            align-items: center;
+            gap: 4px;
+            padding: 0 10px;
+            border-bottom: 1px solid rgba(23, 23, 29, .09);
+            background: #f6f5f2;
+        }
+
+        .browser-bar span {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #c8c6c1;
+        }
+
+        .browser-bar span:first-child {
+            background: #ff9a67;
+        }
+
+        .mock-site {
+            min-height: 218px;
+            padding: 18px 21px;
+        }
+
+        .mock-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 21px;
+        }
+
+        .mock-logo {
+            font-size: .75rem;
+            font-weight: 850;
+            letter-spacing: -.04em;
+        }
+
+        .mock-links {
+            display: flex;
+            gap: 8px;
+        }
+
+        .mock-links i {
+            width: 25px;
+            height: 4px;
+            border-radius: 3px;
+            background: currentColor;
+            opacity: .35;
+        }
+
+        .mock-title {
+            max-width: 76%;
+            margin: 0 0 9px;
+            font-size: clamp(1.05rem, 2.4vw, 1.5rem);
+            font-weight: 850;
+            letter-spacing: -.07em;
+            line-height: 1.05;
+        }
+
+        .mock-copy {
+            max-width: 72%;
+            height: 5px;
+            margin: 5px 0;
+            border-radius: 4px;
+            background: currentColor;
+            opacity: .27;
+        }
+
+        .mock-copy.short {
+            max-width: 48%;
+        }
+
+        .mock-button {
+            width: 82px;
+            height: 20px;
+            margin-top: 12px;
+            border-radius: 6px;
+            background: currentColor;
+            opacity: .92;
+        }
+
+        .mock-panels {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-top: 16px;
+        }
+
+        .mock-panels i {
+            display: block;
+            height: 40px;
+            border-radius: 6px;
+            background: currentColor;
+            opacity: .12;
+        }
+
+        .sample-business .preview {
+            background: linear-gradient(135deg, #e0e9e3, #c8d6ca);
+        }
+
+        .sample-business .mock-site {
+            color: #183629;
+            background: #f5f5ee;
+        }
+
+        .sample-business .mock-button {
+            background: #315d42;
+        }
+
+        .sample-school .preview {
+            background: linear-gradient(135deg, #dce8f6, #a9bedb);
+        }
+
+        .sample-school .mock-site {
+            color: #173a64;
+            background: #fff;
+        }
+
+        .sample-school .mock-title {
+            max-width: 65%;
+        }
+
+        .sample-school .mock-button {
+            background: #d69a36;
+        }
+
+        .sample-shop .preview {
+            background: linear-gradient(135deg, #f8dfd1, #edb79d);
+        }
+
+        .sample-shop .mock-site {
+            color: #4a2d28;
+            background: #fffaf6;
+        }
+
+        .sample-shop .mock-panels i:first-child {
+            background: #d78c70;
+            opacity: .5;
+        }
+
+        .sample-shop .mock-panels i:nth-child(2) {
+            background: #e3c2a8;
+            opacity: .7;
+        }
+
+        .sample-shop .mock-button {
+            background: #9e533d;
+        }
+
+        .sample-portfolio .preview {
+            background: linear-gradient(135deg, #e8e1fa, #c9b9ee);
+        }
+
+        .sample-portfolio .mock-site {
+            color: #27203c;
+            background: #f8f6ff;
+        }
+
+        .sample-portfolio .mock-button {
+            background: #7658df;
+        }
+
+        .sample-restaurant .preview {
+            background: linear-gradient(135deg, #f0dfc0, #d4ae75);
+        }
+
+        .sample-restaurant .mock-site {
+            color: #382719;
+            background: #fcf8ed;
+        }
+
+        .sample-restaurant .mock-button {
+            background: #a64c32;
+        }
+
+        .sample-community .preview {
+            background: linear-gradient(135deg, #d8ece6, #9fc9bd);
+        }
+
+        .sample-community .mock-site {
+            color: #1c433b;
+            background: #f5fbf7;
+        }
+
+        .sample-community .mock-button {
+            background: #30816a;
+        }
+
+        .sample-content {
+            padding: 22px 24px 24px;
+        }
+
+        .sample-label {
+            display: inline-block;
+            margin-bottom: 9px;
+            color: var(--violet-dark);
+            font-size: .73rem;
+            font-weight: 800;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+        }
+
+        .sample-content h3 {
+            margin: 0 0 8px;
+            font-size: 1.25rem;
+            letter-spacing: -.04em;
+        }
+
+        .sample-content p {
+            margin: 0 0 18px;
+            color: var(--muted);
+            font-size: .9rem;
+        }
+
+        .sample-content a {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--violet-dark);
+            font-size: .88rem;
+            font-weight: 750;
+            text-decoration: none;
+        }
+
+        .sample-content a:hover {
+            text-decoration: underline;
+            text-underline-offset: 4px;
+        }
+
+        .closing {
+            padding: clamp(35px, 6vw, 62px);
+            border-radius: 26px;
+            color: var(--white);
+            background: var(--ink);
+            text-align: center;
+        }
+
+        .closing h2 {
+            margin: 0 0 10px;
+            font-size: clamp(1.8rem, 4vw, 2.7rem);
+            letter-spacing: -.06em;
+        }
+
+        .closing p {
+            max-width: 600px;
+            margin: 0 auto 22px;
+            color: #c4c2ca;
+        }
+
+        .site-footer {
+            padding: 26px 0;
+            border-top: 1px solid var(--line);
+        }
+
+        .footer-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .footer-inner p {
+            margin: 0;
+            color: var(--muted);
+            font-size: .83rem;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+        }
+
+        .footer-links a {
+            color: var(--muted);
+            font-size: .83rem;
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            color: var(--violet-dark);
+        }
+
+        :focus-visible {
+            outline: 3px solid var(--orange);
+            outline-offset: 3px;
+        }
+
+        @media (max-width: 700px) {
+            .sample-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-heading {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .preview {
+                min-height: 250px;
+                padding: 24px;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .wrap {
+                width: min(100% - 32px, 1120px);
+            }
+
+            .header-inner {
+                min-height: 68px;
+                align-items: flex-start;
+                flex-direction: column;
+                justify-content: center;
+                gap: 8px;
+                padding: 10px 0;
+            }
+
+            .nav-links {
+                width: 100%;
+                justify-content: space-between;
+                gap: 10px;
+            }
+
+            .nav-links a {
+                font-size: .78rem;
+            }
+
+            .nav-links .nav-cta {
+                padding: 7px 10px;
+            }
+
+            .preview {
+                min-height: 225px;
+                padding: 16px;
+            }
+
+            .mock-site {
+                min-height: 198px;
+                padding: 15px;
+            }
+
+            .sample-content {
+                padding: 20px;
+            }
+
+            .footer-inner {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                transition-duration: .01ms !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="wrap header-inner">
+            <a class="brand" href="maestro.html" aria-label="Maestro home">
+                <span class="brand-mark" aria-hidden="true">M.</span>
+                Maestro
+            </a>
+            <nav class="nav-links" aria-label="Main navigation">
+                <a href="maestro.html#services">Services</a>
+                <a href="maestro.html#pricing">Pricing</a>
+                <a href="maestro.html#process">How it works</a>
+                <a class="nav-cta" href="maestro.html#contact">Start a project</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="wrap">
+                <p class="eyebrow">A few ideas to get you inspired</p>
+                <h1>Sample websites, <span>made for real goals.</span></h1>
+                <p class="hero-copy">Explore concept designs for different kinds of organizations. Each project can be tailored to your content, audience, and brand.</p>
+                <a class="button" href="maestro.html#contact">Plan a website like one of these <span aria-hidden="true">-&gt;</span></a>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="wrap">
+                <div class="section-heading">
+                    <div>
+                        <p class="section-kicker">Explore the concepts</p>
+                        <h2>Different ideas. One thoughtful approach.</h2>
+                        <p>These visual samples show possible directions for the kind of website you might build with Maestro.</p>
+                    </div>
+                </div>
+                <p class="concept-note"><strong>Concept designs:</strong> The previews below are illustrative sample layouts, not claims of completed client projects or live websites.</p>
+                <div class="sample-grid">
+                    <article class="sample-card sample-business">
+                        <div class="preview" aria-label="Illustrative business website design">
+                            <div class="browser">
+                                <div class="browser-bar" aria-hidden="true"><span></span><span></span><span></span></div>
+                                <div class="mock-site">
+                                    <div class="mock-nav"><span class="mock-logo">NORTH &amp; CO.</span><span class="mock-links" aria-hidden="true"><i></i><i></i><i></i></span></div>
+                                    <h4 class="mock-title">Good work starts with a clear plan.</h4>
+                                    <p class="mock-copy"></p><p class="mock-copy short"></p>
+                                    <div class="mock-button"></div>
+                                    <div class="mock-panels" aria-hidden="true"><i></i><i></i><i></i></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sample-content">
+                            <span class="sample-label">Business · concept</span>
+                            <h3>Business services website</h3>
+                            <p>A confident introduction, clear service summaries, and an easy way for potential clients to get in touch.</p>
+                            <a href="maestro.html?project=Business%20website#contact">Plan a business website <span aria-hidden="true">-&gt;</span></a>
+                        </div>
+                    </article>
+
+                    <article class="sample-card sample-school">
+                        <div class="preview" aria-label="Illustrative school website design">
+                            <div class="browser">
+                                <div class="browser-bar" aria-hidden="true"><span></span><span></span><span></span></div>
+                                <div class="mock-site">
+                                    <div class="mock-nav"><span class="mock-logo">HORIZON ACADEMY</span><span class="mock-links" aria-hidden="true"><i></i><i></i><i></i></span></div>
+                                    <h4 class="mock-title">A place to learn, grow, and belong.</h4>
+                                    <p class="mock-copy"></p><p class="mock-copy short"></p>
+                                    <div class="mock-button"></div>
+                                    <div class="mock-panels" aria-hidden="true"><i></i><i></i><i></i></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sample-content">
+                            <span class="sample-label">Education · concept</span>
+                            <h3>Academic or school website</h3>
+                            <p>Help students and families find admissions information, programs, news, and the details they need.</p>
+                            <a href="maestro.html?project=Academic%20or%20school%20website#contact">Plan an academic website <span aria-hidden="true">-&gt;</span></a>
+                        </div>
+                    </article>
+
+                    <article class="sample-card sample-shop">
+                        <div class="preview" aria-label="Illustrative online shop design">
+                            <div class="browser">
+                                <div class="browser-bar" aria-hidden="true"><span></span><span></span><span></span></div>
+                                <div class="mock-site">
+                                    <div class="mock-nav"><span class="mock-logo">STUDIO MARKET</span><span class="mock-links" aria-hidden="true"><i></i><i></i><i></i></span></div>
+                                    <h4 class="mock-title">Everyday finds, made special.</h4>
+                                    <p class="mock-copy"></p><p class="mock-copy short"></p>
+                                    <div class="mock-button"></div>
+                                    <div class="mock-panels" aria-hidden="true"><i></i><i></i><i></i></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sample-content">
+                            <span class="sample-label">Retail · concept</span>
+                            <h3>Online store</h3>
+                            <p>A warm storefront concept with room for product discovery, category highlights, and ordering details.</p>
+                            <a href="maestro.html?project=Online%20store#contact">Plan an online store <span aria-hidden="true">-&gt;</span></a>
+                        </div>
+                    </article>
+
+                    <article class="sample-card sample-portfolio">
+                        <div class="preview" aria-label="Illustrative personal portfolio design">
+                            <div class="browser">
+                                <div class="browser-bar" aria-hidden="true"><span></span><span></span><span></span></div>
+                                <div class="mock-site">
+                                    <div class="mock-nav"><span class="mock-logo">JAMIE PARK</span><span class="mock-links" aria-hidden="true"><i></i><i></i><i></i></span></div>
+                                    <h4 class="mock-title">Creative work with a point of view.</h4>
+                                    <p class="mock-copy"></p><p class="mock-copy short"></p>
+                                    <div class="mock-button"></div>
+                                    <div class="mock-panels" aria-hidden="true"><i></i><i></i><i></i></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sample-content">
+                            <span class="sample-label">Personal brand · concept</span>
+                            <h3>Portfolio website</h3>
+                            <p>A personal home for selected projects, your story, and opportunities to connect or collaborate.</p>
+                            <a href="maestro.html?project=Portfolio%20or%20personal%20website#contact">Plan a portfolio <span aria-hidden="true">-&gt;</span></a>
+                        </div>
+                    </article>
+
+                    <article class="sample-card sample-restaurant">
+                        <div class="preview" aria-label="Illustrative restaurant website design">
+                            <div class="browser">
+                                <div class="browser-bar" aria-hidden="true"><span></span><span></span><span></span></div>
+                                <div class="mock-site">
+                                    <div class="mock-nav"><span class="mock-logo">THE GOOD TABLE</span><span class="mock-links" aria-hidden="true"><i></i><i></i><i></i></span></div>
+                                    <h4 class="mock-title">A little more flavor in your day.</h4>
+                                    <p class="mock-copy"></p><p class="mock-copy short"></p>
+                                    <div class="mock-button"></div>
+                                    <div class="mock-panels" aria-hidden="true"><i></i><i></i><i></i></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sample-content">
+                            <span class="sample-label">Hospitality · concept</span>
+                            <h3>Restaurant or hospitality site</h3>
+                            <p>Bring together your menu, opening hours, location, and booking or enquiry information.</p>
+                            <a href="maestro.html?project=Booking%20or%20service%20website#contact">Plan a hospitality website <span aria-hidden="true">-&gt;</span></a>
+                        </div>
+                    </article>
+
+                    <article class="sample-card sample-community">
+                        <div class="preview" aria-label="Illustrative nonprofit website design">
+                            <div class="browser">
+                                <div class="browser-bar" aria-hidden="true"><span></span><span></span><span></span></div>
+                                <div class="mock-site">
+                                    <div class="mock-nav"><span class="mock-logo">COMMON GROUND</span><span class="mock-links" aria-hidden="true"><i></i><i></i><i></i></span></div>
+                                    <h4 class="mock-title">Small actions. Stronger communities.</h4>
+                                    <p class="mock-copy"></p><p class="mock-copy short"></p>
+                                    <div class="mock-button"></div>
+                                    <div class="mock-panels" aria-hidden="true"><i></i><i></i><i></i></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sample-content">
+                            <span class="sample-label">Community · concept</span>
+                            <h3>Nonprofit or community site</h3>
+                            <p>Explain your mission, show your impact, and help people discover ways to participate or support you.</p>
+                            <a href="maestro.html?project=Community%20or%20nonprofit%20website#contact">Plan a community website <span aria-hidden="true">-&gt;</span></a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" style="padding-top: 0;">
+            <div class="wrap closing">
+                <h2>Have an idea of your own?</h2>
+                <p>Tell us what you want the website to do. We will help shape the right pages and features around your goals.</p>
+                <a class="button" href="maestro.html#contact">Start a project enquiry <span aria-hidden="true">-&gt;</span></a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="wrap footer-inner">
+            <a class="brand" href="maestro.html">
+                <span class="brand-mark" aria-hidden="true">M.</span>
+                Maestro
+            </a>
+            <p>Concept layouts to inspire your next website.</p>
+            <nav class="footer-links" aria-label="Footer navigation">
+                <a href="maestro.html">Home</a>
+                <a href="maestro.html#services">Services</a>
+                <a href="maestro.html#pricing">Pricing</a>
+                <a href="maestro.html#contact">Contact</a>
+            </nav>
+        </div>
+    </footer>
+</body>
+</html>

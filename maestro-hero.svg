@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" fill="none">
+  <defs>
+    <linearGradient id="screen" x1="932" y1="157" x2="1406" y2="707" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#29243B"/>
+      <stop offset="1" stop-color="#191821"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="1000" y1="180" x2="1470" y2="770" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#7658DF"/>
+      <stop offset="1" stop-color="#7658DF" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="chart" x1="1100" y1="420" x2="1380" y2="574" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#D7F36A" stop-opacity=".34"/>
+      <stop offset="1" stop-color="#D7F36A" stop-opacity="0"/>
+    </linearGradient>
+    <pattern id="grid" width="44" height="44" patternUnits="userSpaceOnUse">
+      <path d="M44 0H0V44" stroke="#fff" stroke-opacity=".055"/>
+    </pattern>
+    <filter id="shadow" x="850" y="106" width="766" height="792" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="30"/>
+      <feOffset dy="18"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope=".28"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <rect width="1600" height="900" fill="url(#grid)"/>
+  <circle cx="1268" cy="448" r="318" fill="url(#glow)" opacity=".28"/>
+  <circle cx="1313" cy="440" r="276" stroke="#D7F36A" stroke-opacity=".15"/>
+  <circle cx="1313" cy="440" r="338" stroke="#fff" stroke-opacity=".1"/>
+  <g filter="url(#shadow)">
+    <rect x="944" y="165" width="474" height="544" rx="26" fill="url(#screen)" stroke="#fff" stroke-opacity=".22"/>
+    <path d="M945 205C945 182.909 962.909 165 985 165H1377C1399.09 165 1417 182.909 1417 205V223H945V205Z" fill="#fff" fill-opacity=".06"/>
+    <circle cx="976" cy="194" r="5" fill="#FF9A67"/>
+    <circle cx="994" cy="194" r="5" fill="#D7F36A"/>
+    <circle cx="1012" cy="194" r="5" fill="#7658DF"/>
+    <rect x="1038" y="187" width="182" height="14" rx="7" fill="#fff" fill-opacity=".1"/>
+    <rect x="978" y="256" width="111" height="8" rx="4" fill="#D7F36A" fill-opacity=".8"/>
+    <rect x="978" y="284" width="288" height="23" rx="6" fill="#fff" fill-opacity=".91"/>
+    <rect x="978" y="317" width="209" height="23" rx="6" fill="#D7F36A" fill-opacity=".9"/>
+    <rect x="978" y="357" width="278" height="8" rx="4" fill="#fff" fill-opacity=".35"/>
+    <rect x="978" y="374" width="239" height="8" rx="4" fill="#fff" fill-opacity=".22"/>
+    <rect x="978" y="405" width="115" height="34" rx="17" fill="#D7F36A"/>
+    <rect x="978" y="468" width="407" height="184" rx="16" fill="#fff" fill-opacity=".045" stroke="#fff" stroke-opacity=".09"/>
+    <path d="M1001 610L1056 576L1105 587L1159 526L1211 549L1265 496L1315 519L1360 486V630H1001V610Z" fill="url(#chart)"/>
+    <path d="M1001 610L1056 576L1105 587L1159 526L1211 549L1265 496L1315 519L1360 486" stroke="#D7F36A" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M1001 618H1360M1001 578H1360M1001 538H1360M1001 498H1360" stroke="#fff" stroke-opacity=".1"/>
+  </g>
+  <g transform="rotate(-8 1380 670)">
+    <rect x="1259" y="594" width="252" height="144" rx="20" fill="#D7F36A" stroke="#17171D" stroke-opacity=".08"/>
+    <circle cx="1290" cy="628" r="12" fill="#7658DF"/>
+    <rect x="1314" y="621" width="150" height="10" rx="5" fill="#17171D" fill-opacity=".74"/>
+    <rect x="1283" y="661" width="190" height="8" rx="4" fill="#17171D" fill-opacity=".25"/>
+    <rect x="1283" y="679" width="151" height="8" rx="4" fill="#17171D" fill-opacity=".18"/>
+    <rect x="1283" y="703" width="74" height="17" rx="8.5" fill="#7658DF"/>
+  </g>
+  <circle cx="1504" cy="273" r="16" fill="#FF9A67"/>
+  <circle cx="913" cy="650" r="9" fill="#D7F36A"/>
+</svg>

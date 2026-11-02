@@ -1,0 +1,76 @@
+name: Deploy Maestro preview to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/pages.yml"
+      - "maestro.html"
+      - "portfolio.html"
+      - "maestro-hero.svg"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
+      - name: Prepare public static preview
+        run: |
+          mkdir site
+          python3 - <<'PY'
+          from pathlib import Path
+
+          page = Path("maestro.html").read_text(encoding="utf-8")
+          replacements = {
+              'action="maestro-save.php" method="post"':
+                  'onsubmit="return false;"',
+              "Your enquiry is saved to the Maestro database. The site owner can review it in phpMyAdmin under the <strong>Maestro</strong> database.":
+                  "This public GitHub Pages preview is for viewing only. Enquiry submissions are not enabled here.",
+              '<button class="button" type="submit">Send project enquiry <span aria-hidden="true">-&gt;</span></button>':
+                  '<button class="button" type="button" disabled>Enquiries unavailable in preview</button>',
+          }
+
+          for old, new in replacements.items():
+              if page.count(old) != 1:
+                  raise SystemExit(f"Expected one static-preview replacement: {old}")
+              page = page.replace(old, new)
+
+          Path("site/index.html").write_text(page, encoding="utf-8")
+          Path("site/maestro.html").write_text(page, encoding="utf-8")
+          Path("site/portfolio.html").write_bytes(Path("portfolio.html").read_bytes())
+          Path("site/maestro-hero.svg").write_bytes(Path("maestro-hero.svg").read_bytes())
+          PY
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy public preview
+        id: deployment
+        uses: actions/deploy-pages@v4
