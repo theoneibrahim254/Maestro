@@ -1,0 +1,1310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Maestro plans and builds thoughtful websites for businesses, schools, creators, and organizations. Tell us about your next project.">
+    <meta name="theme-color" content="#17171d">
+    <title>Maestro | Websites made for what comes next</title>
+    <style>
+        :root {
+            color-scheme: light;
+            --ink: #17171d;
+            --muted: #69696e;
+            --paper: #f7f6f2;
+            --white: #fff;
+            --line: #e5e3dc;
+            --violet: #7658df;
+            --violet-dark: #6142cf;
+            --lime: #d7f36a;
+            --orange: #ff9a67;
+            --radius: 22px;
+            --shadow: 0 18px 50px rgba(23, 23, 29, .08);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 90px;
+        }
+
+        body {
+            margin: 0;
+            color: var(--ink);
+            background: var(--paper);
+            font-family: Inter, "Segoe UI", Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        button,
+        input,
+        select,
+        textarea {
+            font: inherit;
+        }
+
+        button,
+        a {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .wrap {
+            width: min(1120px, calc(100% - 48px));
+            margin-inline: auto;
+        }
+
+        .site-header {
+            position: sticky;
+            z-index: 10;
+            top: 0;
+            border-bottom: 1px solid rgba(23, 23, 29, .08);
+            background: rgba(247, 246, 242, .94);
+            backdrop-filter: blur(14px);
+        }
+
+        .header-inner {
+            display: flex;
+            min-height: 76px;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+        }
+
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--ink);
+            font-size: 1.22rem;
+            font-weight: 800;
+            letter-spacing: -.06em;
+            text-decoration: none;
+        }
+
+        .brand-mark {
+            display: grid;
+            width: 34px;
+            height: 34px;
+            place-items: center;
+            border-radius: 11px;
+            color: var(--ink);
+            background: var(--lime);
+            font-size: 1.1rem;
+            font-weight: 900;
+            letter-spacing: -.1em;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: clamp(18px, 3vw, 36px);
+        }
+
+        .nav-links a {
+            color: #55545c;
+            font-size: .88rem;
+            font-weight: 650;
+            text-decoration: none;
+            transition: color .2s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a:focus-visible {
+            color: var(--violet-dark);
+        }
+
+        .nav-links .nav-cta {
+            padding: 10px 17px;
+            border-radius: 999px;
+            color: var(--white);
+            background: var(--ink);
+        }
+
+        .nav-links .nav-cta:hover,
+        .nav-links .nav-cta:focus-visible {
+            color: var(--white);
+            background: var(--violet-dark);
+        }
+
+        .hero {
+            position: relative;
+            overflow: hidden;
+            padding: clamp(76px, 11vw, 132px) 0 94px;
+            color: var(--white);
+            background-color: var(--ink);
+            background-image: linear-gradient(90deg, rgba(23, 23, 29, .98) 0%, rgba(23, 23, 29, .94) 42%, rgba(23, 23, 29, .52) 100%), url("maestro-hero.svg");
+            background-position: center;
+            background-size: cover;
+        }
+
+        .hero::before,
+        .hero::after {
+            position: absolute;
+            content: "";
+            pointer-events: none;
+        }
+
+        .hero::before {
+            top: -240px;
+            right: -80px;
+            width: 650px;
+            height: 650px;
+            border: 1px solid rgba(255, 255, 255, .13);
+            border-radius: 50%;
+            box-shadow: 0 0 0 65px rgba(255, 255, 255, .025), 0 0 0 130px rgba(255, 255, 255, .025);
+        }
+
+        .hero::after {
+            right: 12%;
+            bottom: 11%;
+            width: 70px;
+            height: 70px;
+            border-radius: 20px;
+            background: var(--orange);
+            transform: rotate(22deg);
+            opacity: .9;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 760px;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            margin: 0 0 20px;
+            color: var(--lime);
+            font-size: .78rem;
+            font-weight: 750;
+            letter-spacing: .13em;
+            text-transform: uppercase;
+        }
+
+        .eyebrow::before {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: currentColor;
+            content: "";
+        }
+
+        h1,
+        h2,
+        h3,
+        p {
+            margin-top: 0;
+        }
+
+        .hero h1 {
+            max-width: 760px;
+            margin-bottom: 24px;
+            font-size: clamp(3rem, 8vw, 6.1rem);
+            font-weight: 760;
+            letter-spacing: -.075em;
+            line-height: .99;
+        }
+
+        .hero h1 span {
+            color: var(--lime);
+        }
+
+        .hero-copy {
+            max-width: 590px;
+            margin-bottom: 32px;
+            color: #c4c2ca;
+            font-size: clamp(1.05rem, 2vw, 1.2rem);
+            line-height: 1.75;
+        }
+
+        .button-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .button {
+            display: inline-flex;
+            min-height: 50px;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px 21px;
+            border: 1px solid transparent;
+            border-radius: 999px;
+            font-size: .92rem;
+            font-weight: 750;
+            text-decoration: none;
+            transition: transform .2s ease, background .2s ease, border-color .2s ease;
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+        }
+
+        .button-primary {
+            color: var(--ink);
+            background: var(--lime);
+        }
+
+        .button-primary:hover {
+            background: #e5fa94;
+        }
+
+        .button-quiet {
+            border-color: rgba(255, 255, 255, .26);
+            color: var(--white);
+        }
+
+        .button-quiet:hover {
+            border-color: rgba(255, 255, 255, .7);
+        }
+
+        .hero-note {
+            margin: 44px 0 0;
+            color: #aaa8b1;
+            font-size: .84rem;
+        }
+
+        .hero-note strong {
+            color: var(--white);
+        }
+
+        .section {
+            padding: clamp(72px, 9vw, 112px) 0;
+        }
+
+        .section-heading {
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+            gap: 30px;
+            margin-bottom: 38px;
+        }
+
+        .section-heading > div {
+            max-width: 680px;
+        }
+
+        .section-kicker {
+            margin-bottom: 12px;
+            color: var(--violet-dark);
+            font-size: .77rem;
+            font-weight: 800;
+            letter-spacing: .13em;
+            text-transform: uppercase;
+        }
+
+        .section-heading h2 {
+            margin-bottom: 12px;
+            font-size: clamp(2.15rem, 5vw, 3.55rem);
+            font-weight: 740;
+            letter-spacing: -.065em;
+            line-height: 1.07;
+        }
+
+        .section-heading p {
+            max-width: 620px;
+            margin-bottom: 0;
+            color: var(--muted);
+        }
+
+        .text-link {
+            display: inline-flex;
+            flex: 0 0 auto;
+            align-items: center;
+            gap: 8px;
+            color: var(--violet-dark);
+            font-size: .9rem;
+            font-weight: 750;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 4px;
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .service-card {
+            display: flex;
+            min-height: 245px;
+            flex-direction: column;
+            padding: 25px;
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            background: var(--white);
+            transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-4px);
+            border-color: #cbc1f0;
+            box-shadow: var(--shadow);
+        }
+
+        .service-number {
+            display: grid;
+            width: 38px;
+            height: 38px;
+            margin-bottom: 22px;
+            place-items: center;
+            border-radius: 12px;
+            color: var(--violet-dark);
+            background: #f0ecff;
+            font-size: .81rem;
+            font-weight: 800;
+        }
+
+        .service-card h3 {
+            margin-bottom: 9px;
+            font-size: 1.15rem;
+            letter-spacing: -.035em;
+        }
+
+        .service-card p {
+            margin-bottom: 18px;
+            color: var(--muted);
+            font-size: .9rem;
+            line-height: 1.65;
+        }
+
+        .service-card a {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            margin-top: auto;
+            color: var(--violet-dark);
+            font-size: .86rem;
+            font-weight: 750;
+            text-decoration: none;
+        }
+
+        .service-card a:hover {
+            text-decoration: underline;
+            text-underline-offset: 4px;
+        }
+
+        .pricing-section {
+            padding-top: 0;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            align-items: stretch;
+            gap: 18px;
+        }
+
+        .price-card {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 28px;
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            background: var(--white);
+        }
+
+        .price-card-featured {
+            border: 2px solid var(--violet);
+            box-shadow: var(--shadow);
+        }
+
+        .price-badge {
+            align-self: flex-start;
+            margin-bottom: 15px;
+            padding: 5px 10px;
+            border-radius: 999px;
+            color: var(--violet-dark);
+            background: #f0ecff;
+            font-size: .73rem;
+            font-weight: 800;
+        }
+
+        .price-card h3 {
+            margin-bottom: 5px;
+            font-size: 1.25rem;
+            letter-spacing: -.04em;
+        }
+
+        .price-summary {
+            min-height: 48px;
+            margin-bottom: 17px;
+            color: var(--muted);
+            font-size: .87rem;
+        }
+
+        .price-amount {
+            margin-bottom: 2px;
+            font-size: clamp(2rem, 3.5vw, 2.7rem);
+            font-weight: 800;
+            letter-spacing: -.07em;
+            line-height: 1.1;
+            white-space: nowrap;
+        }
+
+        .price-unit {
+            margin-bottom: 20px;
+            color: var(--muted);
+            font-size: .78rem;
+        }
+
+        .price-features {
+            display: grid;
+            gap: 11px;
+            margin: 0 0 26px;
+            padding: 19px 0 0;
+            border-top: 1px solid var(--line);
+            list-style: none;
+        }
+
+        .price-features li {
+            position: relative;
+            padding-left: 22px;
+            color: #4f4e55;
+            font-size: .86rem;
+        }
+
+        .price-features li::before {
+            position: absolute;
+            left: 0;
+            color: var(--violet-dark);
+            content: "âœ“";
+            font-weight: 800;
+        }
+
+        .price-card .button {
+            width: 100%;
+            margin-top: auto;
+            border-color: var(--ink);
+            color: var(--white);
+            background: var(--ink);
+        }
+
+        .price-card .button:hover {
+            border-color: var(--violet-dark);
+            background: var(--violet-dark);
+        }
+
+        .pricing-note {
+            max-width: 820px;
+            margin: 22px auto 0;
+            color: var(--muted);
+            font-size: .82rem;
+            text-align: center;
+        }
+
+        .feature-band {
+            padding: 0 0 clamp(72px, 9vw, 112px);
+        }
+
+        .feature-inner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            overflow: hidden;
+            border-radius: 30px;
+            color: var(--white);
+            background: var(--violet);
+        }
+
+        .feature-copy {
+            padding: clamp(30px, 6vw, 64px);
+        }
+
+        .feature-copy .section-kicker {
+            color: var(--lime);
+        }
+
+        .feature-copy h2 {
+            max-width: 440px;
+            margin-bottom: 18px;
+            font-size: clamp(2rem, 4vw, 3.1rem);
+            letter-spacing: -.06em;
+            line-height: 1.08;
+        }
+
+        .feature-copy p {
+            max-width: 460px;
+            margin-bottom: 25px;
+            color: #e5defd;
+        }
+
+        .feature-copy .button-primary {
+            background: var(--lime);
+        }
+
+        .feature-list {
+            display: grid;
+            align-content: center;
+            gap: 0;
+            padding: 34px clamp(28px, 5vw, 58px);
+            background: rgba(28, 12, 87, .16);
+        }
+
+        .feature-item {
+            display: grid;
+            grid-template-columns: 42px 1fr;
+            gap: 15px;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, .19);
+        }
+
+        .feature-item:last-child {
+            border-bottom: 0;
+        }
+
+        .feature-item span {
+            color: var(--lime);
+            font-size: .82rem;
+            font-weight: 800;
+        }
+
+        .feature-item h3 {
+            margin-bottom: 4px;
+            font-size: 1rem;
+        }
+
+        .feature-item p {
+            margin: 0;
+            color: #e5defd;
+            font-size: .88rem;
+        }
+
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 24px;
+        }
+
+        .process-step {
+            padding-top: 20px;
+            border-top: 2px solid #d6d2c8;
+        }
+
+        .process-step span {
+            display: block;
+            margin-bottom: 18px;
+            color: var(--violet-dark);
+            font-size: .79rem;
+            font-weight: 800;
+            letter-spacing: .08em;
+        }
+
+        .process-step h3 {
+            margin-bottom: 8px;
+            font-size: 1.06rem;
+            letter-spacing: -.025em;
+        }
+
+        .process-step p {
+            margin: 0;
+            color: var(--muted);
+            font-size: .89rem;
+        }
+
+        .faq-section {
+            background: #efeee8;
+        }
+
+        .faq-layout {
+            display: grid;
+            grid-template-columns: .8fr 1.2fr;
+            gap: clamp(32px, 8vw, 100px);
+        }
+
+        .faq-layout .section-heading {
+            display: block;
+            margin: 0;
+        }
+
+        .faq-list details {
+            padding: 20px 0;
+            border-bottom: 1px solid #d8d6cf;
+        }
+
+        .faq-list details:first-child {
+            border-top: 1px solid #d8d6cf;
+        }
+
+        .faq-list summary {
+            position: relative;
+            padding-right: 30px;
+            font-weight: 740;
+            list-style: none;
+            cursor: pointer;
+        }
+
+        .faq-list summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .faq-list summary::after {
+            position: absolute;
+            top: 0;
+            right: 3px;
+            color: var(--violet-dark);
+            content: "+";
+            font-size: 1.25rem;
+            line-height: 1.3;
+        }
+
+        .faq-list details[open] summary::after {
+            content: "-";
+        }
+
+        .faq-list details p {
+            max-width: 650px;
+            margin: 12px 30px 0 0;
+            color: var(--muted);
+            font-size: .92rem;
+        }
+
+        .contact-section {
+            padding-bottom: clamp(72px, 9vw, 112px);
+        }
+
+        .contact-panel {
+            display: grid;
+            grid-template-columns: .85fr 1.15fr;
+            gap: clamp(32px, 7vw, 78px);
+            padding: clamp(28px, 6vw, 62px);
+            border-radius: 30px;
+            background: var(--white);
+            box-shadow: var(--shadow);
+        }
+
+        .contact-copy h2 {
+            margin-bottom: 14px;
+            font-size: clamp(2.1rem, 4.5vw, 3.5rem);
+            letter-spacing: -.07em;
+            line-height: 1.04;
+        }
+
+        .contact-copy > p:not(.section-kicker) {
+            color: var(--muted);
+        }
+
+        .contact-note {
+            margin-top: 24px;
+            padding: 15px 17px;
+            border-radius: 14px;
+            color: #554a23;
+            background: #f7f5e9;
+            font-size: .84rem;
+        }
+
+        .contact-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            align-content: start;
+        }
+
+        .field {
+            display: grid;
+            gap: 7px;
+        }
+
+        .field-wide,
+        .form-status,
+        .contact-form button {
+            grid-column: 1 / -1;
+        }
+
+        .field label {
+            font-size: .82rem;
+            font-weight: 730;
+        }
+
+        .field input,
+        .field select,
+        .field textarea {
+            width: 100%;
+            min-height: 48px;
+            padding: 11px 13px;
+            border: 1px solid #dedde3;
+            border-radius: 11px;
+            outline: none;
+            color: var(--ink);
+            background: #fbfbfa;
+            transition: border-color .2s ease, box-shadow .2s ease;
+        }
+
+        .field textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .field input:focus,
+        .field select:focus,
+        .field textarea:focus {
+            border-color: var(--violet);
+            box-shadow: 0 0 0 3px rgba(118, 88, 223, .14);
+        }
+
+        .contact-form .button {
+            width: fit-content;
+            border: 0;
+            color: var(--white);
+            background: var(--ink);
+            cursor: pointer;
+        }
+
+        .contact-form .button:hover {
+            background: var(--violet-dark);
+        }
+
+        .form-status {
+            min-height: 1.4em;
+            margin: -4px 0 0;
+            color: var(--muted);
+            font-size: .85rem;
+        }
+
+        .site-footer {
+            padding: 28px 0;
+            border-top: 1px solid var(--line);
+        }
+
+        .footer-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .footer-inner p {
+            margin: 0;
+            color: var(--muted);
+            font-size: .83rem;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-links a {
+            color: var(--muted);
+            font-size: .83rem;
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            color: var(--violet-dark);
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        :focus-visible {
+            outline: 3px solid var(--orange);
+            outline-offset: 3px;
+        }
+
+        @media (max-width: 800px) {
+            .nav-links {
+                gap: 16px;
+            }
+
+            .nav-links a {
+                font-size: .82rem;
+            }
+
+            .service-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .process-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .feature-inner,
+            .contact-panel {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-list {
+                padding-top: 10px;
+                padding-bottom: 28px;
+            }
+
+            .faq-layout {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .wrap {
+                width: min(100% - 32px, 1120px);
+            }
+
+            .header-inner {
+                min-height: 68px;
+                align-items: flex-start;
+                flex-direction: column;
+                justify-content: center;
+                gap: 8px;
+                padding: 10px 0;
+            }
+
+            .nav-links {
+                width: 100%;
+                justify-content: space-between;
+                gap: 8px;
+            }
+
+            .nav-links a {
+                font-size: .75rem;
+            }
+
+            .nav-links .nav-cta {
+                padding: 7px 10px;
+            }
+
+            .hero {
+                padding: 74px 0 72px;
+            }
+
+            .hero::before {
+                right: -390px;
+            }
+
+            .hero::after {
+                right: 7%;
+                bottom: 7%;
+                width: 43px;
+                height: 43px;
+            }
+
+            .section-heading {
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            .service-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .price-card {
+                padding: 24px;
+            }
+
+            .service-card {
+                min-height: auto;
+            }
+
+            .process-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .contact-form {
+                grid-template-columns: 1fr;
+            }
+
+            .field-wide,
+            .form-status,
+            .contact-form button {
+                grid-column: auto;
+            }
+
+            .footer-inner {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                transition-duration: .01ms !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="wrap header-inner">
+            <a class="brand" href="#home" aria-label="Maestro home">
+                <span class="brand-mark" aria-hidden="true">M.</span>
+                Maestro
+            </a>
+            <nav class="nav-links" aria-label="Main navigation">
+                <a href="#services">Services</a>
+                <a href="portfolio.html">Work</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#process">How it works</a>
+                <a href="#faq">FAQs</a>
+                <a class="nav-cta" href="#contact">Start a project</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero" id="home">
+            <div class="wrap hero-content">
+                <p class="eyebrow">Web design and development</p>
+                <h1>A better website for <span>what comes next.</span></h1>
+                <p class="hero-copy">From your first idea to launch day, Maestro creates clear, modern websites that help businesses, schools, and ambitious people make their next move online.</p>
+                <div class="button-row">
+                    <a class="button button-primary" href="#contact">Tell us about your project <span aria-hidden="true">-&gt;</span></a>
+                    <a class="button button-quiet" href="#services">Explore what we build</a>
+                    <a class="button button-quiet" href="portfolio.html">See sample websites <span aria-hidden="true">-&gt;</span></a>
+                </div>
+                <p class="hero-note"><strong>Starting from an idea?</strong> That is enough to get the conversation started.</p>
+            </div>
+        </section>
+
+        <section class="section" id="services">
+            <div class="wrap">
+                <div class="section-heading">
+                    <div>
+                        <p class="section-kicker">What we build</p>
+                        <h2>One good website can open a lot of doors.</h2>
+                        <p>Every project is shaped around its audience and purpose. Pick a starting point below, or <a class="text-link" href="#contact">tell us what you have in mind</a>.</p>
+                    </div>
+                    <a class="text-link" href="#process">See how projects work <span aria-hidden="true">-&gt;</span></a>
+                </div>
+                <div class="service-grid">
+                    <article class="service-card">
+                        <span class="service-number">01</span>
+                        <h3>Business websites</h3>
+                        <p>Build trust, explain what you do, and make it simple for the right customers to reach you.</p>
+                        <a href="#contact" data-project="Business website">Discuss a business site <span aria-hidden="true">-&gt;</span></a>
+                    </article>
+                    <article class="service-card">
+                        <span class="service-number">02</span>
+                        <h3>Academic websites</h3>
+                        <p>Share school information, programs, admissions, events, and resources with students and families.</p>
+                        <a href="#contact" data-project="Academic or school website">Discuss an academic site <span aria-hidden="true">-&gt;</span></a>
+                    </article>
+                    <article class="service-card">
+                        <span class="service-number">03</span>
+                        <h3>Online stores</h3>
+                        <p>Present products clearly and help customers move from browsing to placing an order.</p>
+                        <a href="#contact" data-project="Online store">Discuss an online store <span aria-hidden="true">-&gt;</span></a>
+                    </article>
+                    <article class="service-card">
+                        <span class="service-number">04</span>
+                        <h3>Portfolio websites</h3>
+                        <p>Showcase your work, experience, and personality in a polished home for your next opportunity.</p>
+                        <a href="#contact" data-project="Portfolio or personal website">Discuss a portfolio <span aria-hidden="true">-&gt;</span></a>
+                    </article>
+                    <article class="service-card">
+                        <span class="service-number">05</span>
+                        <h3>Landing pages</h3>
+                        <p>Give a campaign, event, new product, or special offer one focused page with a clear next step.</p>
+                        <a href="#contact" data-project="Landing page">Discuss a landing page <span aria-hidden="true">-&gt;</span></a>
+                    </article>
+                    <article class="service-card">
+                        <span class="service-number">06</span>
+                        <h3>Community and nonprofit</h3>
+                        <p>Tell your story, explain your impact, and help supporters find ways to take part.</p>
+                        <a href="#contact" data-project="Community or nonprofit website">Discuss an organization site <span aria-hidden="true">-&gt;</span></a>
+                    </article>
+                    <article class="service-card">
+                        <span class="service-number">07</span>
+                        <h3>Booking and service sites</h3>
+                        <p>Make your services easy to understand and give visitors a straightforward way to enquire or book.</p>
+                        <a href="#contact" data-project="Booking or service website">Discuss a service site <span aria-hidden="true">-&gt;</span></a>
+                    </article>
+                    <article class="service-card">
+                        <span class="service-number">08</span>
+                        <h3>Website redesigns</h3>
+                        <p>Refresh an outdated site with a more useful structure, updated visuals, and a mobile-friendly experience.</p>
+                        <a href="#contact" data-project="Website redesign">Discuss a redesign <span aria-hidden="true">-&gt;</span></a>
+                    </article>
+                    <article class="service-card">
+                        <span class="service-number">09</span>
+                        <h3>Something more custom?</h3>
+                        <p>Have an idea that does not fit a category? Share the challenge and we can explore the right solution.</p>
+                        <a href="#contact" data-project="Custom website or web project">Talk through an idea <span aria-hidden="true">-&gt;</span></a>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section pricing-section" id="pricing">
+            <div class="wrap">
+                <div class="section-heading">
+                    <div>
+                        <p class="section-kicker">Straightforward starting prices</p>
+                        <h2>Choose a package to get started.</h2>
+                        <p>These one-time project fees give you a clear starting point. We will confirm the final scope and quote with you before any work begins.</p>
+                    </div>
+                    <a class="text-link" href="#contact">Ask about your project <span aria-hidden="true">-&gt;</span></a>
+                </div>
+                <div class="pricing-grid">
+                    <article class="price-card">
+                        <span class="price-badge">A simple start</span>
+                        <h3>Starter</h3>
+                        <p class="price-summary">A polished, focused website for a new idea or small organization.</p>
+                        <p class="price-amount">KES 15,000</p>
+                        <p class="price-unit">Starting price Â· one-time project fee</p>
+                        <ul class="price-features">
+                            <li>Up to 3 pages</li>
+                            <li>Mobile-friendly layout</li>
+                            <li>Contact or enquiry form</li>
+                            <li>Basic on-page SEO setup</li>
+                        </ul>
+                        <a class="button" href="#contact" data-package="Starter" data-price="KES 15,000">Enquire about Starter <span aria-hidden="true">-&gt;</span></a>
+                    </article>
+                    <article class="price-card price-card-featured">
+                        <span class="price-badge">Popular choice</span>
+                        <h3>Business</h3>
+                        <p class="price-summary">A fuller online presence for a growing business, school, or service.</p>
+                        <p class="price-amount">KES 35,000</p>
+                        <p class="price-unit">Starting price Â· one-time project fee</p>
+                        <ul class="price-features">
+                            <li>Up to 7 pages</li>
+                            <li>Custom visual styling</li>
+                            <li>Contact and lead enquiry forms</li>
+                            <li>Mobile-friendly layout and SEO setup</li>
+                        </ul>
+                        <a class="button" href="#contact" data-package="Business" data-price="KES 35,000">Enquire about Business <span aria-hidden="true">-&gt;</span></a>
+                    </article>
+                    <article class="price-card">
+                        <span class="price-badge">Built to grow</span>
+                        <h3>Advanced</h3>
+                        <p class="price-summary">For larger websites, custom features, or more involved project needs.</p>
+                        <p class="price-amount">KES 75,000+</p>
+                        <p class="price-unit">Starting price Â· quoted to project scope</p>
+                        <ul class="price-features">
+                            <li>Multi-page, custom website scope</li>
+                            <li>Advanced features planned to your needs</li>
+                            <li>Booking or shop requirements can be scoped</li>
+                            <li>Project-specific launch plan</li>
+                        </ul>
+                        <a class="button" href="#contact" data-package="Advanced" data-price="KES 75,000+">Enquire about Advanced <span aria-hidden="true">-&gt;</span></a>
+                    </article>
+                </div>
+                <p class="pricing-note">Prices are indicative starting rates in Kenyan shillings. Domain registration, hosting, paid third-party services, and features beyond the listed scope may cost extra; we will agree on any additional charges with you before proceeding.</p>
+            </div>
+        </section>
+
+        <section class="feature-band" id="about">
+            <div class="wrap feature-inner">
+                <div class="feature-copy">
+                    <p class="section-kicker">Thoughtful by design</p>
+                    <h2>More than a good-looking homepage.</h2>
+                    <p>Your website should make things easier for the people using it and for the person running it. We keep the message clear, the experience straightforward, and the details aligned with your goals.</p>
+                    <a class="button button-primary" href="#contact">Plan your website <span aria-hidden="true">-&gt;</span></a>
+                </div>
+                <div class="feature-list" aria-label="What to expect">
+                    <div class="feature-item">
+                        <span>01</span>
+                        <div>
+                            <h3>Made for your audience</h3>
+                            <p>Useful information, easy navigation, and a clear next step.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <span>02</span>
+                        <div>
+                            <h3>Ready for every screen</h3>
+                            <p>A considered experience on phones, tablets, and computers.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <span>03</span>
+                        <div>
+                            <h3>Built around your goals</h3>
+                            <p>A practical approach shaped by your brief, priorities, and budget.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="process">
+            <div class="wrap">
+                <div class="section-heading">
+                    <div>
+                        <p class="section-kicker">A clear process</p>
+                        <h2>From first conversation to go-live.</h2>
+                        <p>No complicated jargon. We agree on the goal, work through the details together, and keep you informed as the website takes shape.</p>
+                    </div>
+                    <a class="text-link" href="#contact">Start with a conversation <span aria-hidden="true">-&gt;</span></a>
+                </div>
+                <div class="process-grid">
+                    <article class="process-step">
+                        <span>STEP 01</span>
+                        <h3>Tell us the idea</h3>
+                        <p>Share what you do, who the site is for, and what you want it to help you achieve.</p>
+                    </article>
+                    <article class="process-step">
+                        <span>STEP 02</span>
+                        <h3>Shape the scope</h3>
+                        <p>We clarify the pages, features, content, timing, and a practical project estimate.</p>
+                    </article>
+                    <article class="process-step">
+                        <span>STEP 03</span>
+                        <h3>Design and build</h3>
+                        <p>The website comes together around the agreed plan, with opportunities for your feedback.</p>
+                    </article>
+                    <article class="process-step">
+                        <span>STEP 04</span>
+                        <h3>Review and launch</h3>
+                        <p>We review the finished pages, prepare for launch, and discuss what support comes next.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section faq-section" id="faq">
+            <div class="wrap faq-layout">
+                <div class="section-heading">
+                    <p class="section-kicker">Good to know</p>
+                    <h2>Questions before you get started?</h2>
+                    <p>Every project is different. These answers cover the basics; your enquiry can include anything else on your mind.</p>
+                </div>
+                <div class="faq-list">
+                    <details>
+                        <summary>What kind of website projects do you take on?</summary>
+                        <p>Business, academic, ecommerce, portfolio, landing page, community, booking, redesign, and custom web projects are all welcome. Use the enquiry form to describe your needs.</p>
+                    </details>
+                    <details>
+                        <summary>How much will my website cost?</summary>
+                        <p>Cost depends on the pages, features, content, and overall scope. Once we understand your goals, we can discuss a suitable approach and estimate before work begins.</p>
+                    </details>
+                    <details>
+                        <summary>How long does a project take?</summary>
+                        <p>Timing varies with the size of the site and how quickly content and feedback are available. We will talk through a realistic schedule when we define the project.</p>
+                    </details>
+                    <details>
+                        <summary>Do I need to have everything ready first?</summary>
+                        <p>No. A rough idea is enough to start a conversation. We can identify the information, images, and decisions needed as the project takes shape.</p>
+                    </details>
+                    <details>
+                        <summary>Can you update or improve a website I already have?</summary>
+                        <p>Yes. Let us know what you would like to change, what is working well, and share the current website address in your message.</p>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <section class="contact-section" id="contact">
+            <div class="wrap contact-panel">
+                <div class="contact-copy">
+                    <p class="section-kicker">Your next step</p>
+                    <h2>Let's make your idea happen.</h2>
+                    <p>Tell us a little about your project. Whether you have a complete brief or just the beginning of an idea, we would love to hear what you are planning.</p>
+                    <div class="contact-note">This public GitHub Pages preview is for viewing only. Enquiry submissions are not enabled here.</div>
+                </div>
+                <form class="contact-form" id="project-form" onsubmit="return false;">
+                    <div class="field" style="position: absolute; left: -10000px;" aria-hidden="true">
+                        <label for="website">Leave this field empty</label>
+                        <input id="website" name="website" type="text" tabindex="-1" autocomplete="off">
+                    </div>
+                    <div class="field">
+                        <label for="name">Your name</label>
+                        <input id="name" name="name" type="text" maxlength="150" autocomplete="name" required>
+                    </div>
+                    <div class="field">
+                        <label for="email">Your email</label>
+                        <input id="email" name="email" type="email" maxlength="254" autocomplete="email" required>
+                    </div>
+                    <div class="field field-wide">
+                        <label for="project-type">What are you looking to build?</label>
+                        <select id="project-type" name="project-type" required>
+                            <option value="">Choose a project type</option>
+                            <option>Business website</option>
+                            <option>Academic or school website</option>
+                            <option>Online store</option>
+                            <option>Portfolio or personal website</option>
+                            <option>Landing page</option>
+                            <option>Community or nonprofit website</option>
+                            <option>Booking or service website</option>
+                            <option>Website redesign</option>
+                            <option>Custom website or web project</option>
+                            <option>Not sure yet</option>
+                        </select>
+                    </div>
+                    <div class="field field-wide">
+                        <label for="message">A few details about your project</label>
+                        <textarea id="message" name="message" maxlength="4000" placeholder="What are you hoping your website will help you do?" required></textarea>
+                    </div>
+                    <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+                    <button class="button" type="button" disabled>Enquiries unavailable in preview</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="wrap footer-inner">
+            <a class="brand" href="#home">
+                <span class="brand-mark" aria-hidden="true">M.</span>
+                Maestro
+            </a>
+            <p>Websites made for what comes next.</p>
+            <nav class="footer-links" aria-label="Footer navigation">
+                <a href="#services">Services</a>
+                <a href="portfolio.html">Sample websites</a>
+                <a href="#about">About</a>
+                <a href="#faq">FAQs</a>
+                <a href="#contact">Contact</a>
+            </nav>
+        </div>
+    </footer>
+
+    <script>
+        const projectForm = document.querySelector("#project-form");
+        const projectType = document.querySelector("#project-type");
+        const formStatus = document.querySelector("#form-status");
+
+        if (new URLSearchParams(window.location.search).get("submitted") === "1") {
+            formStatus.textContent = "Thank you. Your enquiry has been received.";
+        }
+
+        document.querySelectorAll("[data-project]").forEach((link) => {
+            link.addEventListener("click", () => {
+                projectType.value = link.dataset.project;
+            });
+        });
+
+        const requestedProject = new URLSearchParams(window.location.search).get("project");
+        if (requestedProject && [...projectType.options].some((option) => option.value === requestedProject || option.textContent === requestedProject)) {
+            projectType.value = requestedProject;
+        }
+
+        document.querySelectorAll("[data-package]").forEach((link) => {
+            link.addEventListener("click", () => {
+                if (!projectType.value) {
+                    projectType.value = "Not sure yet";
+                }
+
+                const packageNote = `I'm interested in the ${link.dataset.package} package (${link.dataset.price} starting price).`;
+                const message = document.querySelector("#message");
+                if (!message.value.includes(packageNote)) {
+                    message.value = message.value ? `${message.value}\n\n${packageNote}` : packageNote;
+                }
+            });
+        });
+
+    </script>
+</body>
+</html>
