@@ -10,6 +10,8 @@ on:
       - "maestro-api/**"
       - "portfolio.html"
       - "maestro-hero.svg"
+      - "robots.txt"
+      - "sitemap.xml"
   workflow_dispatch:
 
 permissions:
@@ -110,6 +112,8 @@ jobs:
           Path("site/maestro.html").write_text(page, encoding="utf-8")
           Path("site/portfolio.html").write_bytes(Path("portfolio.html").read_bytes())
           Path("site/maestro-hero.svg").write_bytes(Path("maestro-hero.svg").read_bytes())
+          Path("site/robots.txt").write_bytes(Path("robots.txt").read_bytes())
+          Path("site/sitemap.xml").write_bytes(Path("sitemap.xml").read_bytes())
           PY
 
       - name: Upload Pages artifact
