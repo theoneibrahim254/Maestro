@@ -98,7 +98,16 @@ async function darajaRequest(url, options, operation) {
     });
     const result = await response.json().catch(() => null);
     if (!response.ok || !result || typeof result !== "object") {
-        throw new Error(`${operation} returned HTTP ${response.status}.`);
+        const details = {};
+        for (const key of ["errorCode", "errorMessage", "requestId", "ResponseCode", "ResponseDescription"]) {
+            const value = result?.[key];
+            if (typeof value === "string" || typeof value === "number") {
+                details[key] = String(value).slice(0, 300);
+            }
+        }
+        throw new Error(
+            `${operation} returned HTTP ${response.status}.${Object.keys(details).length ? ` ${JSON.stringify(details)}` : ""}`,
+        );
     }
     return result;
 }
