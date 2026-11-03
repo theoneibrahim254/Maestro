@@ -838,7 +838,8 @@
             }
 
             .feature-inner,
-            .contact-panel {
+            .contact-panel,
+            .mpesa-panel {
                 grid-template-columns: 1fr;
             }
 
@@ -941,6 +942,497 @@
             *::after {
                 scroll-behavior: auto !important;
                 transition-duration: .01ms !important;
+            }
+        }
+
+        :root {
+            --paper: #f8f7f3;
+            --white: #fffefa;
+            --line: #e8e6de;
+            --shadow: 0 22px 60px rgba(23, 23, 29, .09);
+        }
+
+        body {
+            background: var(--paper);
+            letter-spacing: -.012em;
+        }
+
+        .site-header {
+            border-bottom-color: rgba(23, 23, 29, .07);
+            background: rgba(248, 247, 243, .9);
+            box-shadow: 0 8px 26px rgba(23, 23, 29, .035);
+        }
+
+        .header-inner {
+            min-height: 80px;
+        }
+
+        .brand {
+            gap: 12px;
+            font-size: 1.28rem;
+        }
+
+        .brand-mark {
+            width: 38px;
+            height: 38px;
+            border-radius: 13px;
+            box-shadow: 0 5px 14px rgba(215, 243, 106, .28);
+        }
+
+        .nav-links a {
+            transition: color .2s ease, background .2s ease, transform .2s ease;
+        }
+
+        .nav-links .nav-cta {
+            padding: 11px 19px;
+            box-shadow: 0 6px 16px rgba(23, 23, 29, .12);
+        }
+
+        .nav-links .nav-cta:hover {
+            transform: translateY(-1px);
+        }
+
+        .hero {
+            display: flex;
+            min-height: min(720px, calc(100svh - 80px));
+            align-items: center;
+            padding: clamp(88px, 10vw, 138px) 0 clamp(80px, 9vw, 120px);
+            background-image: linear-gradient(90deg, rgba(23, 23, 29, .99) 0%, rgba(23, 23, 29, .95) 39%, rgba(23, 23, 29, .58) 74%, rgba(23, 23, 29, .38) 100%), url("maestro-hero.svg");
+        }
+
+        .hero-content {
+            max-width: 1120px;
+        }
+
+        .eyebrow {
+            gap: 11px;
+            margin-bottom: 24px;
+            letter-spacing: .16em;
+        }
+
+        .eyebrow::before {
+            width: 9px;
+            height: 9px;
+            box-shadow: 0 0 0 5px rgba(215, 243, 106, .12);
+        }
+
+        .hero h1 {
+            max-width: 790px;
+            margin-bottom: 26px;
+            font-size: clamp(3.2rem, 7.3vw, 5.8rem);
+            letter-spacing: -.078em;
+            line-height: .98;
+            text-wrap: balance;
+        }
+
+        .hero-copy {
+            max-width: 570px;
+            margin-bottom: 34px;
+            color: #d0cfd5;
+            line-height: 1.8;
+        }
+
+        .button {
+            min-height: 52px;
+            padding: 13px 22px;
+            transition: transform .2s ease, background .2s ease, border-color .2s ease, box-shadow .2s ease;
+        }
+
+        .button-primary {
+            box-shadow: 0 8px 24px rgba(215, 243, 106, .17);
+        }
+
+        .button-primary:hover {
+            box-shadow: 0 12px 28px rgba(215, 243, 106, .24);
+        }
+
+        .hero-note {
+            margin-top: 38px;
+        }
+
+        .section {
+            padding-top: clamp(82px, 9vw, 120px);
+            padding-bottom: clamp(82px, 9vw, 120px);
+        }
+
+        .section-heading {
+            margin-bottom: 42px;
+        }
+
+        .section-kicker {
+            margin-bottom: 14px;
+            letter-spacing: .15em;
+        }
+
+        .section-heading h2 {
+            text-wrap: balance;
+        }
+
+        .text-link {
+            transition: color .2s ease;
+        }
+
+        .service-grid {
+            gap: 18px;
+        }
+
+        .service-card {
+            min-height: 252px;
+            padding: 27px;
+            border-radius: 20px;
+            background: linear-gradient(145deg, #fffefa, #fff);
+            box-shadow: 0 4px 16px rgba(23, 23, 29, .025);
+        }
+
+        .service-card:hover {
+            box-shadow: 0 16px 38px rgba(23, 23, 29, .09);
+        }
+
+        .service-number {
+            width: 42px;
+            height: 42px;
+            border: 1px solid #e8e1ff;
+            border-radius: 14px;
+        }
+
+        .service-card h3,
+        .price-card h3,
+        .process-step h3 {
+            letter-spacing: -.04em;
+        }
+
+        .pricing-section {
+            padding-top: 20px;
+        }
+
+        .price-card {
+            padding: 30px;
+            border-radius: 22px;
+            box-shadow: 0 5px 22px rgba(23, 23, 29, .035);
+            transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+        }
+
+        .price-card:hover {
+            transform: translateY(-4px);
+            border-color: #d7d0f0;
+            box-shadow: var(--shadow);
+        }
+
+        .price-card-featured {
+            border: 2px solid var(--violet);
+            background: linear-gradient(155deg, #fffefa 42%, #f6f2ff);
+            box-shadow: 0 16px 40px rgba(118, 88, 223, .12);
+        }
+
+        .price-card-featured:hover {
+            border-color: var(--violet-dark);
+            box-shadow: 0 22px 50px rgba(118, 88, 223, .18);
+        }
+
+        .price-badge {
+            padding: 6px 11px;
+        }
+
+        .price-card-featured .price-badge {
+            color: var(--ink);
+            background: var(--lime);
+        }
+
+        .price-card .button-mpesa {
+            margin-top: 10px;
+            border: 1px solid #168653;
+            color: #126840;
+            background: #f0fbf4;
+        }
+
+        .price-card .button-mpesa:hover {
+            border-color: #126840;
+            color: #fff;
+            background: #168653;
+        }
+
+        .mpesa-panel {
+            display: grid;
+            grid-template-columns: .9fr 1.1fr;
+            gap: clamp(26px, 5vw, 58px);
+            margin-top: 34px;
+            padding: clamp(26px, 5vw, 48px);
+            border: 1px solid #e8e5dc;
+            border-radius: 26px;
+            background: linear-gradient(125deg, #f3fae7, #fffefa 56%);
+            box-shadow: 0 12px 34px rgba(23, 23, 29, .055);
+        }
+
+        .mpesa-copy h3 {
+            margin-bottom: 10px;
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            letter-spacing: -.055em;
+            line-height: 1.15;
+        }
+
+        .mpesa-copy > p:not(.section-kicker) {
+            color: var(--muted);
+            font-size: .92rem;
+        }
+
+        .mpesa-copy .section-kicker {
+            color: #126840;
+        }
+
+        .mpesa-amount {
+            display: inline-flex;
+            margin-top: 4px;
+            padding: 7px 12px;
+            border-radius: 999px;
+            color: #126840;
+            background: #e4f4cf;
+            font-size: .84rem;
+            font-weight: 800;
+        }
+
+        .mpesa-form {
+            display: grid;
+            gap: 14px;
+            align-content: center;
+        }
+
+        .mpesa-form label {
+            font-size: .84rem;
+            font-weight: 730;
+        }
+
+        .mpesa-form select,
+        .mpesa-form input {
+            width: 100%;
+            min-height: 49px;
+            padding: 11px 13px;
+            border: 1px solid #deded5;
+            border-radius: 12px;
+            color: var(--ink);
+            background: #fff;
+        }
+
+        .mpesa-form select:focus,
+        .mpesa-form input:focus {
+            border-color: #168653;
+            outline: 3px solid rgba(22, 134, 83, .14);
+        }
+
+        .mpesa-form button {
+            width: fit-content;
+            border: 0;
+            color: #fff;
+            background: #168653;
+            cursor: pointer;
+        }
+
+        .mpesa-form button:hover:not(:disabled) {
+            background: #126840;
+        }
+
+        .mpesa-form button:disabled {
+            cursor: not-allowed;
+            opacity: .62;
+        }
+
+        .mpesa-status {
+            min-height: 1.5em;
+            margin: 0;
+            color: #4c4b50;
+            font-size: .85rem;
+        }
+
+        .price-amount {
+            letter-spacing: -.075em;
+        }
+
+        .feature-inner {
+            border-radius: 32px;
+            background-color: #32275d;
+            background-image: radial-gradient(ellipse at 9% 0%, rgba(215, 243, 106, .13), transparent 42%), linear-gradient(125deg, #493484, #2d2452 72%);
+            box-shadow: 0 24px 60px rgba(54, 39, 101, .16);
+        }
+
+        .feature-list {
+            background: rgba(23, 16, 54, .23);
+        }
+
+        .feature-item {
+            padding: 22px 0;
+        }
+
+        .process-grid {
+            gap: 20px;
+        }
+
+        .process-step {
+            padding: 22px 20px 20px 0;
+            border-top: 2px solid #d6d2c8;
+            transition: border-color .2s ease, transform .2s ease;
+        }
+
+        .process-step:hover {
+            transform: translateY(-3px);
+            border-top-color: var(--violet);
+        }
+
+        .faq-section {
+            background: #f0efe9;
+        }
+
+        .faq-list details {
+            padding: 22px 0;
+            border-color: #dddbd3;
+        }
+
+        .faq-list summary {
+            transition: color .2s ease;
+        }
+
+        .faq-list summary:hover,
+        .faq-list details[open] summary {
+            color: var(--violet-dark);
+        }
+
+        .faq-list summary::after {
+            top: -3px;
+            right: 0;
+            display: grid;
+            width: 28px;
+            height: 28px;
+            place-items: center;
+            border-radius: 50%;
+            background: #e5e0f4;
+            font-size: 1.1rem;
+        }
+
+        .contact-section {
+            padding-top: clamp(82px, 9vw, 120px);
+        }
+
+        .contact-panel {
+            border: 1px solid rgba(232, 230, 222, .8);
+            border-radius: 30px;
+            background: radial-gradient(ellipse at 0% 0%, rgba(215, 243, 106, .12), transparent 36%), var(--white);
+            box-shadow: 0 24px 70px rgba(23, 23, 29, .09);
+        }
+
+        .contact-note {
+            border: 1px solid rgba(215, 243, 106, .45);
+            border-radius: 16px;
+            background: #f7f7e9;
+        }
+
+        .field input,
+        .field select,
+        .field textarea {
+            border-color: #e4e2db;
+            border-radius: 13px;
+            background: rgba(255, 255, 255, .8);
+        }
+
+        .field input:focus,
+        .field select:focus,
+        .field textarea:focus {
+            box-shadow: 0 0 0 4px rgba(118, 88, 223, .12);
+        }
+
+        .contact-form .button {
+            min-width: 200px;
+            box-shadow: 0 8px 20px rgba(23, 23, 29, .12);
+        }
+
+        .site-footer {
+            padding: 34px 0;
+            background: rgba(255, 254, 250, .55);
+        }
+
+        .footer-links a {
+            transition: color .2s ease;
+        }
+
+        @media (max-width: 800px) {
+            .hero {
+                min-height: 610px;
+                background-position: 58% center;
+            }
+
+            .hero-content {
+                max-width: 100%;
+            }
+
+            .price-card-featured {
+                transform: none;
+            }
+
+            .price-card-featured:hover {
+                transform: translateY(-4px);
+            }
+        }
+
+        @media (max-width: 560px) {
+            .header-inner {
+                min-height: 74px;
+            }
+
+            .hero {
+                min-height: 0;
+                padding: 76px 0 68px;
+                background-image: linear-gradient(90deg, rgba(23, 23, 29, .98), rgba(23, 23, 29, .84)), url("maestro-hero.svg");
+                background-position: 61% center;
+            }
+
+            .hero h1 {
+                font-size: clamp(3.05rem, 13vw, 4.5rem);
+            }
+
+            .hero-copy {
+                font-size: 1rem;
+            }
+
+            .button-row {
+                align-items: stretch;
+            }
+
+            .button-row .button {
+                width: 100%;
+            }
+
+            .section {
+                padding-top: 72px;
+                padding-bottom: 72px;
+            }
+
+            .pricing-section {
+                padding-top: 8px;
+            }
+
+            .contact-section {
+                padding-top: 72px;
+            }
+
+            .contact-panel {
+                gap: 28px;
+                padding: 25px 20px;
+                border-radius: 24px;
+            }
+
+            .mpesa-panel {
+                gap: 22px;
+                padding: 24px 20px;
+                border-radius: 22px;
+            }
+
+            .contact-form .button {
+                width: 100%;
+            }
+
+            .mpesa-form button {
+                width: 100%;
+            }
+
+            .footer-links {
+                gap: 12px 18px;
             }
         }
     </style>
@@ -1071,6 +1563,7 @@
                             <li>Basic on-page SEO setup</li>
                         </ul>
                         <a class="button" href="#contact" data-package="Starter" data-price="KES 15,000">Enquire about Starter <span aria-hidden="true">-&gt;</span></a>
+                        <a class="button button-mpesa" href="#mpesa-payment" data-package="Starter" data-price="KES 15,000" data-mpesa-package="Starter">Pay KES 15,000 with M-PESA <span aria-hidden="true">-&gt;</span></a>
                     </article>
                     <article class="price-card price-card-featured">
                         <span class="price-badge">Popular choice</span>
@@ -1085,6 +1578,7 @@
                             <li>Mobile-friendly layout and SEO setup</li>
                         </ul>
                         <a class="button" href="#contact" data-package="Business" data-price="KES 35,000">Enquire about Business <span aria-hidden="true">-&gt;</span></a>
+                        <a class="button button-mpesa" href="#mpesa-payment" data-package="Business" data-price="KES 35,000" data-mpesa-package="Business">Pay KES 35,000 with M-PESA <span aria-hidden="true">-&gt;</span></a>
                     </article>
                     <article class="price-card">
                         <span class="price-badge">Built to grow</span>
@@ -1102,6 +1596,30 @@
                     </article>
                 </div>
                 <p class="pricing-note">Prices are indicative starting rates in Kenyan shillings. Domain registration, hosting, paid third-party services, and features beyond the listed scope may cost extra; we will agree on any additional charges with you before proceeding.</p>
+                <div class="mpesa-panel" id="mpesa-payment">
+                    <div class="mpesa-copy">
+                        <p class="section-kicker">Safaricom M-PESA</p>
+                        <h3>Pay securely from your phone.</h3>
+                        <p>Choose a fixed-price package and enter your Kenyan mobile number. We will send an M-PESA prompt to your phone; check the amount and approve it with your M-PESA PIN.</p>
+                        <p class="mpesa-amount" id="mpesa-amount">Starter · KES 15,000</p>
+                        <p>Advanced projects are quoted first and can be paid after the scope is agreed.</p>
+                    </div>
+                    <form class="mpesa-form" id="mpesa-payment-form" data-payment-endpoint="">
+                        <div class="field">
+                            <label for="mpesa-package">Package</label>
+                            <select id="mpesa-package" name="package" required>
+                                <option value="Starter">Starter · KES 15,000</option>
+                                <option value="Business">Business · KES 35,000</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label for="mpesa-phone">Kenyan M-PESA phone number</label>
+                            <input id="mpesa-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="0712 345 678" maxlength="20" required>
+                        </div>
+                        <button class="button" id="mpesa-submit" type="submit" disabled>Send M-PESA prompt</button>
+                        <p class="mpesa-status" id="mpesa-status" role="status" aria-live="polite">M-PESA checkout is unavailable until payment hosting is connected.</p>
+                    </form>
+                </div>
             </div>
         </section>
 
@@ -1275,6 +1793,127 @@
         const projectForm = document.querySelector("#project-form");
         const projectType = document.querySelector("#project-type");
         const formStatus = document.querySelector("#form-status");
+        const mpesaForm = document.querySelector("#mpesa-payment-form");
+        const mpesaPackage = document.querySelector("#mpesa-package");
+        const mpesaPhone = document.querySelector("#mpesa-phone");
+        const mpesaSubmit = document.querySelector("#mpesa-submit");
+        const mpesaStatus = document.querySelector("#mpesa-status");
+        const mpesaAmount = document.querySelector("#mpesa-amount");
+        const mpesaEndpoint = mpesaForm.dataset.paymentEndpoint;
+        const mpesaPrices = { Starter: 15000, Business: 35000 };
+
+        function updateMpesaAmount() {
+            const amount = mpesaPrices[mpesaPackage.value];
+            mpesaAmount.textContent = `${mpesaPackage.value} · KES ${amount.toLocaleString("en-KE")}`;
+        }
+
+        function clearStoredPayment() {
+            try {
+                sessionStorage.removeItem("maestroMpesaPaymentReference");
+            } catch (error) {
+                mpesaStatus.textContent = "Payment status is confirmed, but this browser could not clear its saved payment reference.";
+            }
+        }
+
+        async function monitorMpesaPayment(reference) {
+            for (let attempt = 0; attempt < 60; attempt += 1) {
+                await new Promise((resolve) => setTimeout(resolve, 2000));
+                try {
+                    const response = await fetch(`${mpesaEndpoint}?status=${encodeURIComponent(reference)}`, {
+                        cache: "no-store",
+                    });
+                    const payment = await response.json();
+                    if (!response.ok) {
+                        throw new Error(payment.message || "We could not check the payment status.");
+                    }
+
+                    if (!mpesaPrices[payment.package]) {
+                        throw new Error("The payment package could not be verified.");
+                    }
+                    mpesaPackage.value = payment.package;
+                    updateMpesaAmount();
+                    if (payment.status === "paid") {
+                        mpesaStatus.textContent = `Payment confirmed for ${payment.package} · KES ${payment.amount.toLocaleString("en-KE")}. Thank you.`;
+                        clearStoredPayment();
+                        return;
+                    }
+                    if (payment.status === "failed") {
+                        mpesaStatus.textContent = "The payment was not completed. Confirm the prompt is no longer active before trying again.";
+                        clearStoredPayment();
+                        mpesaSubmit.disabled = false;
+                        return;
+                    }
+                } catch (error) {
+                    mpesaStatus.textContent = "The M-PESA prompt was sent, but its status could not be checked. Refresh this page to resume checking; do not send another prompt.";
+                    return;
+                }
+            }
+            mpesaStatus.textContent = "We are still waiting for M-PESA confirmation. Do not start another prompt yet; refresh this page shortly to resume checking.";
+        }
+
+        mpesaPackage.addEventListener("change", updateMpesaAmount);
+
+        document.querySelectorAll("[data-mpesa-package]").forEach((link) => {
+            link.addEventListener("click", () => {
+                mpesaPackage.value = link.dataset.mpesaPackage;
+                updateMpesaAmount();
+                mpesaPhone.focus({ preventScroll: true });
+                if (!mpesaEndpoint) {
+                    mpesaStatus.textContent = "M-PESA checkout is not connected yet. Please use the enquiry form to arrange payment.";
+                }
+            });
+        });
+
+        if (mpesaEndpoint) {
+            mpesaSubmit.disabled = false;
+            mpesaStatus.textContent = "Your phone number is used to send the payment prompt and confirm its status.";
+            try {
+                const storedReference = sessionStorage.getItem("maestroMpesaPaymentReference");
+                if (storedReference && /^[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+$/.test(storedReference)) {
+                    mpesaSubmit.disabled = true;
+                    mpesaStatus.textContent = "Resuming the M-PESA payment status check.";
+                    monitorMpesaPayment(storedReference);
+                }
+            } catch (error) {
+                mpesaStatus.textContent = "Payment tracking is unavailable in this browser session. Keep this page open after requesting a prompt.";
+            }
+        }
+
+        mpesaForm.addEventListener("submit", async (event) => {
+            event.preventDefault();
+            if (!mpesaEndpoint || !mpesaForm.reportValidity()) {
+                return;
+            }
+
+            mpesaSubmit.disabled = true;
+            mpesaStatus.textContent = "Sending your M-PESA prompt…";
+
+            try {
+                const response = await fetch(mpesaEndpoint, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ package: mpesaPackage.value, phone: mpesaPhone.value.trim() }),
+                });
+                const result = await response.json();
+                if (!response.ok || !/^[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+$/.test(result.reference || "")) {
+                    throw new Error(result.message || "We could not start the M-PESA prompt.");
+                }
+
+                let canResume = true;
+                try {
+                    sessionStorage.setItem("maestroMpesaPaymentReference", result.reference);
+                } catch (error) {
+                    canResume = false;
+                }
+                mpesaStatus.textContent = canResume
+                    ? result.message
+                    : "The prompt was sent. Keep this page open until M-PESA confirms the payment.";
+                await monitorMpesaPayment(result.reference);
+            } catch (error) {
+                mpesaStatus.textContent = error.message || "The payment service could not be reached. Please try again later.";
+                mpesaSubmit.disabled = false;
+            }
+        });
 
         if (new URLSearchParams(window.location.search).get("submitted") === "1") {
             formStatus.textContent = "Thank you. Your enquiry has been received.";

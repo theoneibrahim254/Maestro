@@ -7,6 +7,7 @@ on:
     paths:
       - ".github/workflows/pages.yml"
       - "maestro.html"
+      - "maestro-api/**"
       - "portfolio.html"
       - "maestro-hero.svg"
   workflow_dispatch:
@@ -35,6 +36,7 @@ jobs:
       - name: Prepare public static preview
         env:
           MAESTRO_SUBMIT_URL: ${{ vars.MAESTRO_SUBMIT_URL }}
+          MAESTRO_PAYMENT_URL: ${{ vars.MAESTRO_PAYMENT_URL }}
         run: |
           mkdir site
           python3 - <<'PY'
@@ -46,10 +48,13 @@ jobs:
 
           page = Path("maestro.html").read_text(encoding="utf-8")
           form = 'action="maestro-save.php" method="post"'
+          payment_marker = 'data-payment-endpoint=""'
           note = "Your enquiry is saved to the Maestro database. The site owner can review it in phpMyAdmin under the <strong>Maestro</strong> database."
           button = '<button class="button" type="submit">Send project enquiry <span aria-hidden="true">-&gt;</span></button>'
 
           endpoint = os.environ.get("MAESTRO_SUBMIT_URL", "").strip()
+          payment_endpoint = os.environ.get("MAESTRO_PAYMENT_URL", "").strip()
+          replacements = {}
           if endpoint:
               parsed = urlparse(endpoint)
               if (
@@ -66,16 +71,36 @@ jobs:
                   parsed.port
               except ValueError as error:
                   raise SystemExit("MAESTRO_SUBMIT_URL has an invalid port.") from error
-              replacements = {
+              replacements.update({
                   form: f'action="{escape(endpoint, quote=True)}" method="post"',
                   note: "Your enquiry is sent securely to Maestro. Your contact details are used to respond to your project enquiry.",
-              }
+              })
           else:
-              replacements = {
+              replacements.update({
                   form: 'onsubmit="return false;"',
                   note: "This public GitHub Pages preview is for viewing only. Enquiry submissions are not enabled yet.",
-                  button: '<button class="button" type="button" disabled>Enquiries unavailable until PHP hosting is connected</button>',
-              }
+                  button: '<button class="button" type="button" disabled>Enquiries unavailable until form hosting is connected</button>',
+              })
+
+          if payment_endpoint:
+              parsed_payment = urlparse(payment_endpoint)
+              if (
+                  parsed_payment.scheme != "https"
+                  or not parsed_payment.hostname
+                  or parsed_payment.username
+                  or parsed_payment.password
+                  or parsed_payment.query
+                  or parsed_payment.fragment
+                  or re.search(r"""[\s"'<>\\]""", payment_endpoint)
+              ):
+                  raise SystemExit("MAESTRO_PAYMENT_URL must be a public HTTPS URL without credentials, query, or fragment.")
+              try:
+                  parsed_payment.port
+              except ValueError as error:
+                  raise SystemExit("MAESTRO_PAYMENT_URL has an invalid port.") from error
+              replacements[payment_marker] = f'data-payment-endpoint="{escape(payment_endpoint, quote=True)}"'
+          else:
+              replacements[payment_marker] = payment_marker
 
           for old, new in replacements.items():
               if page.count(old) != 1:
