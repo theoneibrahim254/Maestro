@@ -91,14 +91,14 @@ function setCors(req, res, config) {
     return true;
 }
 
-async function darajaRequest(url, options) {
+async function darajaRequest(url, options, operation) {
     const response = await fetch(url, {
         ...options,
         signal: AbortSignal.timeout(25000),
     });
     const result = await response.json().catch(() => null);
     if (!response.ok || !result || typeof result !== "object") {
-        throw new Error(`Daraja request returned HTTP ${response.status}.`);
+        throw new Error(`${operation} returned HTTP ${response.status}.`);
     }
     return result;
 }
@@ -108,6 +108,7 @@ async function accessToken(config) {
     const result = await darajaRequest(
         `${config.apiBase}/oauth/v1/generate?grant_type=client_credentials`,
         { headers: { Authorization: `Basic ${credentials}`, Accept: "application/json" } },
+        "Daraja OAuth",
     );
     if (typeof result.access_token !== "string" || !result.access_token) {
         throw new Error("Daraja did not return an access token.");
@@ -235,7 +236,7 @@ async function startPrompt(req, res, config) {
             AccountReference: "Maestro",
             TransactionDesc: packageName,
         }),
-    });
+    }, "Daraja STK Push");
 
     if (
         String(result.ResponseCode) !== "0"
@@ -274,7 +275,7 @@ async function checkStatus(req, res, config) {
             Timestamp: timestamp,
             CheckoutRequestID: reference.checkoutRequestId,
         }),
-    });
+    }, "Daraja STK Push query");
 
     if (result.CheckoutRequestID !== reference.checkoutRequestId) {
         return sendJson(res, 502, { message: "Daraja returned a different payment reference." });
@@ -338,7 +339,10 @@ module.exports = async function paymentHandler(req, res) {
         res.setHeader("Allow", "GET, POST, OPTIONS");
         return sendJson(res, 405, { message: "Use the payment form to start or check a payment." });
     } catch (error) {
-        console.error("Maestro Daraja request failed.");
+        console.error("Maestro Daraja request failed.", {
+            name: error instanceof Error ? error.name : "UnknownError",
+            message: error instanceof Error ? error.message : "Unknown error",
+        });
         return sendJson(res, 502, { message: "The Daraja payment service is temporarily unavailable. Please try again later." });
     }
 };
