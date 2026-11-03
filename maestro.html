@@ -32,6 +32,9 @@
         }
 
         body {
+            position: relative;
+            isolation: isolate;
+            overflow-x: hidden;
             margin: 0;
             color: var(--ink);
             background: var(--paper);
@@ -39,6 +42,69 @@
             font-size: 16px;
             line-height: 1.65;
             -webkit-font-smoothing: antialiased;
+        }
+
+        .ambient-scene {
+            position: fixed;
+            z-index: -1;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+            perspective: 1000px;
+        }
+
+        .ambient-orb {
+            position: absolute;
+            width: clamp(240px, 38vw, 560px);
+            aspect-ratio: 1;
+            border-radius: 50%;
+            opacity: .3;
+            filter: blur(2px);
+            transform-style: preserve-3d;
+            will-change: transform;
+        }
+
+        .ambient-orb-one {
+            top: 8%;
+            right: -14%;
+            background: radial-gradient(circle at 34% 34%, rgba(215, 243, 106, .56), rgba(118, 88, 223, .14) 42%, transparent 70%);
+            animation: float-orb-one 24s ease-in-out infinite alternate;
+        }
+
+        .ambient-orb-two {
+            bottom: 1%;
+            left: -18%;
+            width: clamp(220px, 32vw, 460px);
+            background: radial-gradient(circle at 56% 44%, rgba(118, 88, 223, .24), rgba(255, 154, 103, .14) 42%, transparent 70%);
+            animation: float-orb-two 29s ease-in-out infinite alternate;
+        }
+
+        .ambient-ring {
+            position: absolute;
+            top: 42%;
+            left: 49%;
+            width: clamp(180px, 24vw, 340px);
+            aspect-ratio: 1;
+            border: 1px solid rgba(118, 88, 223, .12);
+            border-radius: 50%;
+            box-shadow: 0 0 0 22px rgba(118, 88, 223, .025), inset 0 0 30px rgba(118, 88, 223, .035);
+            transform-style: preserve-3d;
+            animation: turn-ring 36s linear infinite;
+        }
+
+        @keyframes float-orb-one {
+            from { transform: translate3d(0, 0, -40px) rotateX(8deg) rotateY(-12deg); }
+            to { transform: translate3d(-9vw, 8vh, 60px) rotateX(-8deg) rotateY(18deg); }
+        }
+
+        @keyframes float-orb-two {
+            from { transform: translate3d(0, 0, 20px) rotateX(-10deg) rotateY(12deg); }
+            to { transform: translate3d(8vw, -7vh, -50px) rotateX(10deg) rotateY(-16deg); }
+        }
+
+        @keyframes turn-ring {
+            from { transform: translate(-50%, -50%) rotateX(64deg) rotateZ(0deg); }
+            to { transform: translate(-50%, -50%) rotateX(64deg) rotateZ(360deg); }
         }
 
         a {
@@ -679,12 +745,16 @@
 
         .contact-panel {
             display: grid;
-            grid-template-columns: .85fr 1.15fr;
+            grid-template-columns: 1fr;
             gap: clamp(32px, 7vw, 78px);
             padding: clamp(28px, 6vw, 62px);
             border-radius: 30px;
             background: var(--white);
             box-shadow: var(--shadow);
+        }
+
+        .contact-copy {
+            max-width: 700px;
         }
 
         .contact-copy h2 {
@@ -698,81 +768,23 @@
             color: var(--muted);
         }
 
-        .contact-note {
-            margin-top: 24px;
-            padding: 15px 17px;
-            border-radius: 14px;
-            color: #554a23;
-            background: #f7f5e9;
-            font-size: .84rem;
+        .whatsapp-link {
+            gap: 11px;
+            color: #123b2b;
+            background: #25d366;
+            box-shadow: 0 8px 22px rgba(37, 211, 102, .2);
         }
 
-        .contact-form {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-            align-content: start;
+        .whatsapp-link:hover {
+            color: #123b2b;
+            background: #20c45e;
+            box-shadow: 0 12px 26px rgba(37, 211, 102, .28);
         }
 
-        .field {
-            display: grid;
-            gap: 7px;
-        }
-
-        .field-wide,
-        .form-status,
-        .contact-form button {
-            grid-column: 1 / -1;
-        }
-
-        .field label {
-            font-size: .82rem;
-            font-weight: 730;
-        }
-
-        .field input,
-        .field select,
-        .field textarea {
-            width: 100%;
-            min-height: 48px;
-            padding: 11px 13px;
-            border: 1px solid #dedde3;
-            border-radius: 11px;
-            outline: none;
-            color: var(--ink);
-            background: #fbfbfa;
-            transition: border-color .2s ease, box-shadow .2s ease;
-        }
-
-        .field textarea {
-            min-height: 120px;
-            resize: vertical;
-        }
-
-        .field input:focus,
-        .field select:focus,
-        .field textarea:focus {
-            border-color: var(--violet);
-            box-shadow: 0 0 0 3px rgba(118, 88, 223, .14);
-        }
-
-        .contact-form .button {
-            width: fit-content;
-            border: 0;
-            color: var(--white);
-            background: var(--ink);
-            cursor: pointer;
-        }
-
-        .contact-form .button:hover {
-            background: var(--violet-dark);
-        }
-
-        .form-status {
-            min-height: 1.4em;
-            margin: -4px 0 0;
-            color: var(--muted);
-            font-size: .85rem;
+        .whatsapp-icon {
+            width: 23px;
+            height: 23px;
+            flex: 0 0 auto;
         }
 
         .site-footer {
@@ -838,8 +850,7 @@
             }
 
             .feature-inner,
-            .contact-panel,
-            .mpesa-panel {
+            .contact-panel {
                 grid-template-columns: 1fr;
             }
 
@@ -920,16 +931,6 @@
                 gap: 20px;
             }
 
-            .contact-form {
-                grid-template-columns: 1fr;
-            }
-
-            .field-wide,
-            .form-status,
-            .contact-form button {
-                grid-column: auto;
-            }
-
             .footer-inner {
                 align-items: flex-start;
                 flex-direction: column;
@@ -942,6 +943,11 @@
             *::after {
                 scroll-behavior: auto !important;
                 transition-duration: .01ms !important;
+            }
+
+            .ambient-orb,
+            .ambient-ring {
+                animation: none !important;
             }
         }
 
@@ -1138,110 +1144,6 @@
             background: var(--lime);
         }
 
-        .price-card .button-mpesa {
-            margin-top: 10px;
-            border: 1px solid #168653;
-            color: #126840;
-            background: #f0fbf4;
-        }
-
-        .price-card .button-mpesa:hover {
-            border-color: #126840;
-            color: #fff;
-            background: #168653;
-        }
-
-        .mpesa-panel {
-            display: grid;
-            grid-template-columns: .9fr 1.1fr;
-            gap: clamp(26px, 5vw, 58px);
-            margin-top: 34px;
-            padding: clamp(26px, 5vw, 48px);
-            border: 1px solid #e8e5dc;
-            border-radius: 26px;
-            background: linear-gradient(125deg, #f3fae7, #fffefa 56%);
-            box-shadow: 0 12px 34px rgba(23, 23, 29, .055);
-        }
-
-        .mpesa-copy h3 {
-            margin-bottom: 10px;
-            font-size: clamp(1.5rem, 3vw, 2rem);
-            letter-spacing: -.055em;
-            line-height: 1.15;
-        }
-
-        .mpesa-copy > p:not(.section-kicker) {
-            color: var(--muted);
-            font-size: .92rem;
-        }
-
-        .mpesa-copy .section-kicker {
-            color: #126840;
-        }
-
-        .mpesa-amount {
-            display: inline-flex;
-            margin-top: 4px;
-            padding: 7px 12px;
-            border-radius: 999px;
-            color: #126840;
-            background: #e4f4cf;
-            font-size: .84rem;
-            font-weight: 800;
-        }
-
-        .mpesa-form {
-            display: grid;
-            gap: 14px;
-            align-content: center;
-        }
-
-        .mpesa-form label {
-            font-size: .84rem;
-            font-weight: 730;
-        }
-
-        .mpesa-form select,
-        .mpesa-form input {
-            width: 100%;
-            min-height: 49px;
-            padding: 11px 13px;
-            border: 1px solid #deded5;
-            border-radius: 12px;
-            color: var(--ink);
-            background: #fff;
-        }
-
-        .mpesa-form select:focus,
-        .mpesa-form input:focus {
-            border-color: #168653;
-            outline: 3px solid rgba(22, 134, 83, .14);
-        }
-
-        .mpesa-form button {
-            width: fit-content;
-            border: 0;
-            color: #fff;
-            background: #168653;
-            cursor: pointer;
-        }
-
-        .mpesa-form button:hover:not(:disabled) {
-            background: #126840;
-        }
-
-        .mpesa-form button:disabled {
-            cursor: not-allowed;
-            opacity: .62;
-        }
-
-        .mpesa-status {
-            min-height: 1.5em;
-            margin: 0;
-            color: #4c4b50;
-            font-size: .85rem;
-        }
-
         .price-amount {
             letter-spacing: -.075em;
         }
@@ -1315,31 +1217,6 @@
             border-radius: 30px;
             background: radial-gradient(ellipse at 0% 0%, rgba(215, 243, 106, .12), transparent 36%), var(--white);
             box-shadow: 0 24px 70px rgba(23, 23, 29, .09);
-        }
-
-        .contact-note {
-            border: 1px solid rgba(215, 243, 106, .45);
-            border-radius: 16px;
-            background: #f7f7e9;
-        }
-
-        .field input,
-        .field select,
-        .field textarea {
-            border-color: #e4e2db;
-            border-radius: 13px;
-            background: rgba(255, 255, 255, .8);
-        }
-
-        .field input:focus,
-        .field select:focus,
-        .field textarea:focus {
-            box-shadow: 0 0 0 4px rgba(118, 88, 223, .12);
-        }
-
-        .contact-form .button {
-            min-width: 200px;
-            box-shadow: 0 8px 20px rgba(23, 23, 29, .12);
         }
 
         .site-footer {
@@ -1417,20 +1294,6 @@
                 border-radius: 24px;
             }
 
-            .mpesa-panel {
-                gap: 22px;
-                padding: 24px 20px;
-                border-radius: 22px;
-            }
-
-            .contact-form .button {
-                width: 100%;
-            }
-
-            .mpesa-form button {
-                width: 100%;
-            }
-
             .footer-links {
                 gap: 12px 18px;
             }
@@ -1438,6 +1301,11 @@
     </style>
 </head>
 <body>
+    <div class="ambient-scene" aria-hidden="true">
+        <span class="ambient-orb ambient-orb-one"></span>
+        <span class="ambient-orb ambient-orb-two"></span>
+        <span class="ambient-ring"></span>
+    </div>
     <header class="site-header">
         <div class="wrap header-inner">
             <a class="brand" href="#home" aria-label="Maestro home">
@@ -1485,55 +1353,55 @@
                         <span class="service-number">01</span>
                         <h3>Business websites</h3>
                         <p>Build trust, explain what you do, and make it simple for the right customers to reach you.</p>
-                        <a href="#contact" data-project="Business website">Discuss a business site <span aria-hidden="true">-&gt;</span></a>
+                        <a href="#contact">Discuss a business site <span aria-hidden="true">-&gt;</span></a>
                     </article>
                     <article class="service-card">
                         <span class="service-number">02</span>
                         <h3>Academic websites</h3>
                         <p>Share school information, programs, admissions, events, and resources with students and families.</p>
-                        <a href="#contact" data-project="Academic or school website">Discuss an academic site <span aria-hidden="true">-&gt;</span></a>
+                        <a href="#contact">Discuss an academic site <span aria-hidden="true">-&gt;</span></a>
                     </article>
                     <article class="service-card">
                         <span class="service-number">03</span>
                         <h3>Online stores</h3>
                         <p>Present products clearly and help customers move from browsing to placing an order.</p>
-                        <a href="#contact" data-project="Online store">Discuss an online store <span aria-hidden="true">-&gt;</span></a>
+                        <a href="#contact">Discuss an online store <span aria-hidden="true">-&gt;</span></a>
                     </article>
                     <article class="service-card">
                         <span class="service-number">04</span>
                         <h3>Portfolio websites</h3>
                         <p>Showcase your work, experience, and personality in a polished home for your next opportunity.</p>
-                        <a href="#contact" data-project="Portfolio or personal website">Discuss a portfolio <span aria-hidden="true">-&gt;</span></a>
+                        <a href="#contact">Discuss a portfolio <span aria-hidden="true">-&gt;</span></a>
                     </article>
                     <article class="service-card">
                         <span class="service-number">05</span>
                         <h3>Landing pages</h3>
                         <p>Give a campaign, event, new product, or special offer one focused page with a clear next step.</p>
-                        <a href="#contact" data-project="Landing page">Discuss a landing page <span aria-hidden="true">-&gt;</span></a>
+                        <a href="#contact">Discuss a landing page <span aria-hidden="true">-&gt;</span></a>
                     </article>
                     <article class="service-card">
                         <span class="service-number">06</span>
                         <h3>Community and nonprofit</h3>
                         <p>Tell your story, explain your impact, and help supporters find ways to take part.</p>
-                        <a href="#contact" data-project="Community or nonprofit website">Discuss an organization site <span aria-hidden="true">-&gt;</span></a>
+                        <a href="#contact">Discuss an organization site <span aria-hidden="true">-&gt;</span></a>
                     </article>
                     <article class="service-card">
                         <span class="service-number">07</span>
                         <h3>Booking and service sites</h3>
                         <p>Make your services easy to understand and give visitors a straightforward way to enquire or book.</p>
-                        <a href="#contact" data-project="Booking or service website">Discuss a service site <span aria-hidden="true">-&gt;</span></a>
+                        <a href="#contact">Discuss a service site <span aria-hidden="true">-&gt;</span></a>
                     </article>
                     <article class="service-card">
                         <span class="service-number">08</span>
                         <h3>Website redesigns</h3>
                         <p>Refresh an outdated site with a more useful structure, updated visuals, and a mobile-friendly experience.</p>
-                        <a href="#contact" data-project="Website redesign">Discuss a redesign <span aria-hidden="true">-&gt;</span></a>
+                        <a href="#contact">Discuss a redesign <span aria-hidden="true">-&gt;</span></a>
                     </article>
                     <article class="service-card">
                         <span class="service-number">09</span>
                         <h3>Something more custom?</h3>
                         <p>Have an idea that does not fit a category? Share the challenge and we can explore the right solution.</p>
-                        <a href="#contact" data-project="Custom website or web project">Talk through an idea <span aria-hidden="true">-&gt;</span></a>
+                        <a href="#contact">Talk through an idea <span aria-hidden="true">-&gt;</span></a>
                     </article>
                 </div>
             </div>
@@ -1562,8 +1430,7 @@
                             <li>Contact or enquiry form</li>
                             <li>Basic on-page SEO setup</li>
                         </ul>
-                        <a class="button" href="#contact" data-package="Starter" data-price="KES 15,000">Enquire about Starter <span aria-hidden="true">-&gt;</span></a>
-                        <a class="button button-mpesa" href="#mpesa-payment" data-package="Starter" data-price="KES 15,000" data-mpesa-package="Starter">Pay KES 15,000 with M-PESA <span aria-hidden="true">-&gt;</span></a>
+                        <a class="button" href="#contact">Enquire about Starter <span aria-hidden="true">-&gt;</span></a>
                     </article>
                     <article class="price-card price-card-featured">
                         <span class="price-badge">Popular choice</span>
@@ -1577,8 +1444,7 @@
                             <li>Contact and lead enquiry forms</li>
                             <li>Mobile-friendly layout and SEO setup</li>
                         </ul>
-                        <a class="button" href="#contact" data-package="Business" data-price="KES 35,000">Enquire about Business <span aria-hidden="true">-&gt;</span></a>
-                        <a class="button button-mpesa" href="#mpesa-payment" data-package="Business" data-price="KES 35,000" data-mpesa-package="Business">Pay KES 35,000 with M-PESA <span aria-hidden="true">-&gt;</span></a>
+                        <a class="button" href="#contact">Enquire about Business <span aria-hidden="true">-&gt;</span></a>
                     </article>
                     <article class="price-card">
                         <span class="price-badge">Built to grow</span>
@@ -1592,34 +1458,10 @@
                             <li>Booking or shop requirements can be scoped</li>
                             <li>Project-specific launch plan</li>
                         </ul>
-                        <a class="button" href="#contact" data-package="Advanced" data-price="KES 75,000+">Enquire about Advanced <span aria-hidden="true">-&gt;</span></a>
+                        <a class="button" href="#contact">Enquire about Advanced <span aria-hidden="true">-&gt;</span></a>
                     </article>
                 </div>
                 <p class="pricing-note">Prices are indicative starting rates in Kenyan shillings. Domain registration, hosting, paid third-party services, and features beyond the listed scope may cost extra; we will agree on any additional charges with you before proceeding.</p>
-                <div class="mpesa-panel" id="mpesa-payment">
-                    <div class="mpesa-copy">
-                        <p class="section-kicker">Safaricom M-PESA</p>
-                        <h3>Pay securely from your phone.</h3>
-                        <p>Choose a fixed-price package and enter your Kenyan mobile number. We will send an M-PESA prompt to your phone; check the amount and approve it with your M-PESA PIN.</p>
-                        <p class="mpesa-amount" id="mpesa-amount">Starter · KES 15,000</p>
-                        <p>Advanced projects are quoted first and can be paid after the scope is agreed.</p>
-                    </div>
-                    <form class="mpesa-form" id="mpesa-payment-form" data-payment-endpoint="">
-                        <div class="field">
-                            <label for="mpesa-package">Package</label>
-                            <select id="mpesa-package" name="package" required>
-                                <option value="Starter">Starter · KES 15,000</option>
-                                <option value="Business">Business · KES 35,000</option>
-                            </select>
-                        </div>
-                        <div class="field">
-                            <label for="mpesa-phone">Kenyan M-PESA phone number</label>
-                            <input id="mpesa-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="0712 345 678" maxlength="20" required>
-                        </div>
-                        <button class="button" id="mpesa-submit" type="submit" disabled>Send M-PESA prompt</button>
-                        <p class="mpesa-status" id="mpesa-status" role="status" aria-live="polite">M-PESA checkout is unavailable until payment hosting is connected.</p>
-                    </form>
-                </div>
             </div>
         </section>
 
@@ -1702,7 +1544,7 @@
                 <div class="faq-list">
                     <details>
                         <summary>What kind of website projects do you take on?</summary>
-                        <p>Business, academic, ecommerce, portfolio, landing page, community, booking, redesign, and custom web projects are all welcome. Use the enquiry form to describe your needs.</p>
+                        <p>Business, academic, ecommerce, portfolio, landing page, community, booking, redesign, and custom web projects are all welcome. Message us on WhatsApp to tell us what you need.</p>
                     </details>
                     <details>
                         <summary>How much will my website cost?</summary>
@@ -1730,45 +1572,14 @@
                     <p class="section-kicker">Your next step</p>
                     <h2>Let's make your idea happen.</h2>
                     <p>Tell us a little about your project. Whether you have a complete brief or just the beginning of an idea, we would love to hear what you are planning.</p>
-                    <a class="button button-primary" href="https://wa.me/254780241954?text=Hello%20Maestro%2C%20I%27d%20like%20to%20enquire%20about%20a%20website." target="_blank" rel="noopener noreferrer">Enquire on WhatsApp</a>
-                    <div class="contact-note">Your enquiry is saved to the Maestro database. The site owner can review it in phpMyAdmin under the <strong>Maestro</strong> database.</div>
+                    <a class="button whatsapp-link" href="https://wa.me/254780241954?text=Hello%20Maestro%2C%20I%27d%20like%20to%20enquire%20about%20a%20website." target="_blank" rel="noopener noreferrer">
+                        <svg class="whatsapp-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <path d="M20.2 11.7a8.2 8.2 0 0 1-12.1 7.2L3.8 20l1.1-4.1a8.2 8.2 0 1 1 15.3-4.2Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M8.4 8.1c.3-.5.6-.5.9-.5h.5c.2 0 .4.1.5.4l.7 1.7c.1.2.1.4-.1.6l-.6.7c-.2.2-.2.4 0 .6.5.9 1.2 1.6 2.1 2.1.2.1.4.1.6-.1l.7-.8c.2-.2.4-.2.6-.1l1.6.8c.3.1.4.3.4.5 0 .4-.2 1.2-.7 1.6-.5.4-1.1.6-1.7.5-1-.2-2.2-.7-3.5-1.8-1.1-.9-1.9-2.1-2.2-3.1-.3-1 0-2.2.5-3.1Z" fill="currentColor"/>
+                        </svg>
+                        <span>Enquire on WhatsApp</span>
+                    </a>
                 </div>
-                <form class="contact-form" id="project-form" action="maestro-save.php" method="post">
-                    <div class="field" style="position: absolute; left: -10000px;" aria-hidden="true">
-                        <label for="website">Leave this field empty</label>
-                        <input id="website" name="website" type="text" tabindex="-1" autocomplete="off">
-                    </div>
-                    <div class="field">
-                        <label for="name">Your name</label>
-                        <input id="name" name="name" type="text" maxlength="150" autocomplete="name" required>
-                    </div>
-                    <div class="field">
-                        <label for="email">Your email</label>
-                        <input id="email" name="email" type="email" maxlength="254" autocomplete="email" required>
-                    </div>
-                    <div class="field field-wide">
-                        <label for="project-type">What are you looking to build?</label>
-                        <select id="project-type" name="project-type" required>
-                            <option value="">Choose a project type</option>
-                            <option>Business website</option>
-                            <option>Academic or school website</option>
-                            <option>Online store</option>
-                            <option>Portfolio or personal website</option>
-                            <option>Landing page</option>
-                            <option>Community or nonprofit website</option>
-                            <option>Booking or service website</option>
-                            <option>Website redesign</option>
-                            <option>Custom website or web project</option>
-                            <option>Not sure yet</option>
-                        </select>
-                    </div>
-                    <div class="field field-wide">
-                        <label for="message">A few details about your project</label>
-                        <textarea id="message" name="message" maxlength="4000" placeholder="What are you hoping your website will help you do?" required></textarea>
-                    </div>
-                    <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
-                    <button class="button" type="submit">Send project enquiry <span aria-hidden="true">-&gt;</span></button>
-                </form>
             </div>
         </section>
     </main>
@@ -1790,161 +1601,5 @@
         </div>
     </footer>
 
-    <script>
-        const projectForm = document.querySelector("#project-form");
-        const projectType = document.querySelector("#project-type");
-        const formStatus = document.querySelector("#form-status");
-        const mpesaForm = document.querySelector("#mpesa-payment-form");
-        const mpesaPackage = document.querySelector("#mpesa-package");
-        const mpesaPhone = document.querySelector("#mpesa-phone");
-        const mpesaSubmit = document.querySelector("#mpesa-submit");
-        const mpesaStatus = document.querySelector("#mpesa-status");
-        const mpesaAmount = document.querySelector("#mpesa-amount");
-        const mpesaEndpoint = mpesaForm.dataset.paymentEndpoint;
-        const mpesaPrices = { Starter: 15000, Business: 35000 };
-
-        function updateMpesaAmount() {
-            const amount = mpesaPrices[mpesaPackage.value];
-            mpesaAmount.textContent = `${mpesaPackage.value} · KES ${amount.toLocaleString("en-KE")}`;
-        }
-
-        function clearStoredPayment() {
-            try {
-                sessionStorage.removeItem("maestroMpesaPaymentReference");
-            } catch (error) {
-                mpesaStatus.textContent = "Payment status is confirmed, but this browser could not clear its saved payment reference.";
-            }
-        }
-
-        async function monitorMpesaPayment(reference) {
-            for (let attempt = 0; attempt < 60; attempt += 1) {
-                await new Promise((resolve) => setTimeout(resolve, 2000));
-                try {
-                    const response = await fetch(`${mpesaEndpoint}?status=${encodeURIComponent(reference)}`, {
-                        cache: "no-store",
-                    });
-                    const payment = await response.json();
-                    if (!response.ok) {
-                        throw new Error(payment.message || "We could not check the payment status.");
-                    }
-
-                    if (!mpesaPrices[payment.package]) {
-                        throw new Error("The payment package could not be verified.");
-                    }
-                    mpesaPackage.value = payment.package;
-                    updateMpesaAmount();
-                    if (payment.status === "paid") {
-                        mpesaStatus.textContent = `Payment confirmed for ${payment.package} · KES ${payment.amount.toLocaleString("en-KE")}. Thank you.`;
-                        clearStoredPayment();
-                        return;
-                    }
-                    if (payment.status === "failed") {
-                        mpesaStatus.textContent = "The payment was not completed. Confirm the prompt is no longer active before trying again.";
-                        clearStoredPayment();
-                        mpesaSubmit.disabled = false;
-                        return;
-                    }
-                } catch (error) {
-                    mpesaStatus.textContent = "The M-PESA prompt was sent, but its status could not be checked. Refresh this page to resume checking; do not send another prompt.";
-                    return;
-                }
-            }
-            mpesaStatus.textContent = "We are still waiting for M-PESA confirmation. Do not start another prompt yet; refresh this page shortly to resume checking.";
-        }
-
-        mpesaPackage.addEventListener("change", updateMpesaAmount);
-
-        document.querySelectorAll("[data-mpesa-package]").forEach((link) => {
-            link.addEventListener("click", () => {
-                mpesaPackage.value = link.dataset.mpesaPackage;
-                updateMpesaAmount();
-                mpesaPhone.focus({ preventScroll: true });
-                if (!mpesaEndpoint) {
-                    mpesaStatus.textContent = "M-PESA checkout is not connected yet. Please use the enquiry form to arrange payment.";
-                }
-            });
-        });
-
-        if (mpesaEndpoint) {
-            mpesaSubmit.disabled = false;
-            mpesaStatus.textContent = "Your phone number is used to send the payment prompt and confirm its status.";
-            try {
-                const storedReference = sessionStorage.getItem("maestroMpesaPaymentReference");
-                if (storedReference && /^[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+$/.test(storedReference)) {
-                    mpesaSubmit.disabled = true;
-                    mpesaStatus.textContent = "Resuming the M-PESA payment status check.";
-                    monitorMpesaPayment(storedReference);
-                }
-            } catch (error) {
-                mpesaStatus.textContent = "Payment tracking is unavailable in this browser session. Keep this page open after requesting a prompt.";
-            }
-        }
-
-        mpesaForm.addEventListener("submit", async (event) => {
-            event.preventDefault();
-            if (!mpesaEndpoint || !mpesaForm.reportValidity()) {
-                return;
-            }
-
-            mpesaSubmit.disabled = true;
-            mpesaStatus.textContent = "Sending your M-PESA prompt…";
-
-            try {
-                const response = await fetch(mpesaEndpoint, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ package: mpesaPackage.value, phone: mpesaPhone.value.trim() }),
-                });
-                const result = await response.json();
-                if (!response.ok || !/^[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+$/.test(result.reference || "")) {
-                    throw new Error(result.message || "We could not start the M-PESA prompt.");
-                }
-
-                let canResume = true;
-                try {
-                    sessionStorage.setItem("maestroMpesaPaymentReference", result.reference);
-                } catch (error) {
-                    canResume = false;
-                }
-                mpesaStatus.textContent = canResume
-                    ? result.message
-                    : "The prompt was sent. Keep this page open until M-PESA confirms the payment.";
-                await monitorMpesaPayment(result.reference);
-            } catch (error) {
-                mpesaStatus.textContent = error.message || "The payment service could not be reached. Please try again later.";
-                mpesaSubmit.disabled = false;
-            }
-        });
-
-        if (new URLSearchParams(window.location.search).get("submitted") === "1") {
-            formStatus.textContent = "Thank you. Your enquiry has been received.";
-        }
-
-        document.querySelectorAll("[data-project]").forEach((link) => {
-            link.addEventListener("click", () => {
-                projectType.value = link.dataset.project;
-            });
-        });
-
-        const requestedProject = new URLSearchParams(window.location.search).get("project");
-        if (requestedProject && [...projectType.options].some((option) => option.value === requestedProject || option.textContent === requestedProject)) {
-            projectType.value = requestedProject;
-        }
-
-        document.querySelectorAll("[data-package]").forEach((link) => {
-            link.addEventListener("click", () => {
-                if (!projectType.value) {
-                    projectType.value = "Not sure yet";
-                }
-
-                const packageNote = `I'm interested in the ${link.dataset.package} package (${link.dataset.price} starting price).`;
-                const message = document.querySelector("#message");
-                if (!message.value.includes(packageNote)) {
-                    message.value = message.value ? `${message.value}\n\n${packageNote}` : packageNote;
-                }
-            });
-        });
-
-    </script>
 </body>
 </html>

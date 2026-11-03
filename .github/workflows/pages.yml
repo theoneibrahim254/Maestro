@@ -55,34 +55,35 @@ jobs:
           endpoint = os.environ.get("MAESTRO_SUBMIT_URL", "").strip()
           payment_endpoint = os.environ.get("MAESTRO_PAYMENT_URL", "").strip()
           replacements = {}
-          if endpoint:
-              parsed = urlparse(endpoint)
-              if (
-                  parsed.scheme != "https"
-                  or not parsed.hostname
-                  or parsed.username
-                  or parsed.password
-                  or parsed.query
-                  or parsed.fragment
-                  or re.search(r"""[\s"'<>\\]""", endpoint)
-              ):
-                  raise SystemExit("MAESTRO_SUBMIT_URL must be a public HTTPS URL without credentials, query, or fragment.")
-              try:
-                  parsed.port
-              except ValueError as error:
-                  raise SystemExit("MAESTRO_SUBMIT_URL has an invalid port.") from error
-              replacements.update({
-                  form: f'action="{escape(endpoint, quote=True)}" method="post"',
-                  note: "Your enquiry is sent securely to Maestro. Your contact details are used to respond to your project enquiry.",
-              })
-          else:
-              replacements.update({
-                  form: 'onsubmit="return false;"',
-                  note: "This public GitHub Pages preview is for viewing only. Enquiry submissions are not enabled yet.",
-                  button: '<button class="button" type="button" disabled>Enquiries unavailable until form hosting is connected</button>',
-              })
+          if form in page:
+              if endpoint:
+                  parsed = urlparse(endpoint)
+                  if (
+                      parsed.scheme != "https"
+                      or not parsed.hostname
+                      or parsed.username
+                      or parsed.password
+                      or parsed.query
+                      or parsed.fragment
+                      or re.search(r"""[\s"'<>\\]""", endpoint)
+                  ):
+                      raise SystemExit("MAESTRO_SUBMIT_URL must be a public HTTPS URL without credentials, query, or fragment.")
+                  try:
+                      parsed.port
+                  except ValueError as error:
+                      raise SystemExit("MAESTRO_SUBMIT_URL has an invalid port.") from error
+                  replacements.update({
+                      form: f'action="{escape(endpoint, quote=True)}" method="post"',
+                      note: "Your enquiry is sent securely to Maestro. Your contact details are used to respond to your project enquiry.",
+                  })
+              else:
+                  replacements.update({
+                      form: 'onsubmit="return false;"',
+                      note: "This public GitHub Pages preview is for viewing only. Enquiry submissions are not enabled yet.",
+                      button: '<button class="button" type="button" disabled>Enquiries unavailable until form hosting is connected</button>',
+                  })
 
-          if payment_endpoint:
+          if payment_endpoint and payment_marker in page:
               parsed_payment = urlparse(payment_endpoint)
               if (
                   parsed_payment.scheme != "https"
@@ -99,12 +100,10 @@ jobs:
               except ValueError as error:
                   raise SystemExit("MAESTRO_PAYMENT_URL has an invalid port.") from error
               replacements[payment_marker] = f'data-payment-endpoint="{escape(payment_endpoint, quote=True)}"'
-          else:
-              replacements[payment_marker] = payment_marker
 
           for old, new in replacements.items():
               if page.count(old) != 1:
-                  raise SystemExit(f"Expected one enquiry-form replacement: {old}")
+                  raise SystemExit(f"Expected one site replacement: {old}")
               page = page.replace(old, new)
 
           Path("site/index.html").write_text(page, encoding="utf-8")
